@@ -16,7 +16,7 @@ Versões Softwares:
 ->...
 
 PROPOSTA DA RENAULT - caderno de encargos no elearning
-Automato Siemens s7 12000
+Automato Siemens s7 1200
 quais os sensores a utilizar (pressao, temperatura, vibraçoes)
 recolher histórico de dados lidos para detetar eventuais falhas
 com os valores obtidos registar num computador 
