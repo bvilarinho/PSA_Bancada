@@ -20,7 +20,7 @@ Automato Siemens s7 1200
 quais os sensores a utilizar (pressao, temperatura, vibraçoes)
 recolher histórico de dados lidos para detetar eventuais falhas
 com os valores obtidos registar num computador 
-algoritmos de inteligencia artificial e bit learning - python, bastantes bibliotecas 
+algoritmos de inteligencia artificial e deep learning - python, bastantes bibliotecas 
 
 
 
