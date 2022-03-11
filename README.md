@@ -14,3 +14,15 @@ Versões Softwares:
 11 Março 2022
 -> criação repositório (Bruno)
 ->...
+
+PROPOSTA DA RENAULT - caderno de encargos no elearning
+Automato Siemens s7 12000
+quais os sensores a utilizar (pressao, temperatura, vibraçoes)
+recolher histórico de dados lidos para detetar eventuais falhas
+com os valores obtidos registar num computador 
+algoritmos de inteligencia artificial e bit learning - python, bastantes bibliotecas 
+
+
+
+
+
