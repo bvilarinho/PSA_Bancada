@@ -3,7 +3,7 @@
 Bruno Vilarinho- 88732 - b.vilarinho@ua.pt
 Carlos Sousa - 92983 - cdds@ua.pt
 Victor Soares - 93033 - soaresvictor20@ua.pt
-João Quintino - 110463 - jquintino@ua.pt
+Ivan Paiva - 992960 - ivan.atpaiva@ua.pt
 
 Versões Softwares:
 - maquina virtual tia portal V16 e   eplan V2.9 SP1 - versao estudante
@@ -12,8 +12,9 @@ Versões Softwares:
 
 
 11 Março 2022
--> criação repositório (Bruno)
-->...
+-> Criação repositório (Bruno)
+15 Março 2022
+-> Alteração no grupo, saída de João Quintino e entrada de Ivan Paiva (Carlos)
 
 PROPOSTA DA RENAULT - caderno de encargos no elearning
 Automato Siemens s7 1200
@@ -27,7 +28,7 @@ algoritmos de inteligencia artificial e deep learning - python, bastantes biblio
 Coloquei um ficheiro com alguns dos objectivos pretendidos para a bancada.
 Podem consultar alguns dos links que estão no ficheiro.
 Como objetivo:
-  - Adquirir as variáveis mais comuns em ambiente industrial (Pressão, Temperatura, Caudal, Vibrações, etc) 
+  - Adquirir as variáveis mais comuns em ambiente industrial (Pressão, Temperatura, Caudal, Vibrações,etc) 
   - Registo como KM0
   - Avaliação do comportamento dos sinais (degradação) para identificar avarias...
   - Utilizar AI e Deep Learning
