@@ -22,6 +22,16 @@ recolher histórico de dados lidos para detetar eventuais falhas
 com os valores obtidos registar num computador 
 algoritmos de inteligencia artificial e deep learning - python, bastantes bibliotecas 
 
+15 Março 2022
+[A Borges] 
+Coloquei um ficheiro com alguns dos objectivos pretendidos para a bancada.
+Podem consultar alguns dos links que estão no ficheiro.
+Como objetivo:
+  - Adquirir as variáveis mais comuns em ambiente industrial (Pressão, Temperatura, Caudal, Vibrações, etc) 
+  - Registo como KM0
+  - Avaliação do comportamento dos sinais (degradação) para identificar avarias...
+  - Utilizar AI e Deep Learning
+
 
 
 
