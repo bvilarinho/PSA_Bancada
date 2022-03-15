@@ -3,7 +3,7 @@
 Bruno Vilarinho- 88732 - b.vilarinho@ua.pt
 Carlos Sousa - 92983 - cdds@ua.pt
 Victor Soares - 93033 - soaresvictor20@ua.pt
-Ivan Paiva - 992960 - ivan.atpaiva@ua.pt
+Ivan Paiva - 92960 - ivan.atpaiva@ua.pt
 
 Versões Softwares:
 - maquina virtual tia portal V16 e   eplan V2.9 SP1 - versao estudante
