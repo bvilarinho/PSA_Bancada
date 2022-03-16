@@ -10,18 +10,18 @@ Versões Softwares:
 - Visual Studio 2019
 - python 3.7.9
 
-
-11 Março 2022
--> Criação repositório (Bruno)
-15 Março 2022
--> Alteração no grupo, saída de João Quintino e entrada de Ivan Paiva (Carlos)
-
 PROPOSTA DA RENAULT - caderno de encargos no elearning
 Automato Siemens s7 1200
 quais os sensores a utilizar (pressao, temperatura, vibraçoes)
 recolher histórico de dados lidos para detetar eventuais falhas
 com os valores obtidos registar num computador 
 algoritmos de inteligencia artificial e deep learning - python, bastantes bibliotecas 
+
+11 Março 2022
+-> Criação repositório (Bruno)
+
+15 Março 2022
+-> Alteração no grupo, saída de João Quintino e entrada de Ivan Paiva (Carlos)
 
 15 Março 2022
 [A Borges] 
