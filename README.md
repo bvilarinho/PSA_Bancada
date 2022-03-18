@@ -33,6 +33,12 @@ Como objetivo:
   - Avaliação do comportamento dos sinais (degradação) para identificar avarias...
   - Utilizar AI e Deep Learning
 
+18 Março 2022 [Bruno Vilarinho]
+
+Upload do ficheiro da Apresentação 
+Upload diagrama gantt atualizado
+
+
 
 
 
