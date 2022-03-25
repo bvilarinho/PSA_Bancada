@@ -46,13 +46,21 @@ https://www.overleaf.com/8643591524ndhvffrdqhrb
 https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
 
 25 Março 2022 Aula [Ivan] 
+
    tópicos da apresentação:
+   
   -thonny
+  
   -MQTT
+  
   -instalar drivers do ESP
+  
   -Aulas IEA microPython
+  
   -Quarta feira 30/3 16h Aula EPLAN
+  
   -snap7 biblioteca python 
+  
   -raspberry pi - servidor
   
   -Desafio 1/4: Ler temperatura
