@@ -45,6 +45,11 @@ https://www.overleaf.com/8643591524ndhvffrdqhrb
 
 https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
 
+25 Março 2022 Aula [Ivan] 
+ tópicos da apresentação:
+-thonny
+-MQTT
+-Desafio 1/4: Ler temperatura
 
 
 
