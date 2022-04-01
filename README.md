@@ -65,6 +65,7 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
   
   -Desafio 1/4: Ler temperatura
 
+1 de Abril 2022 início da elaboração da aplicação (Carlos)
 
 
 

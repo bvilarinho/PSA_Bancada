@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <title>Diagnóstico</title>
+        <style>
+            a:visited{color:black;}
+            a:hover{color:blue;}
+            a{text-decoration:none;}
+        </style>
+    </head>
+    <body>
+        <div style= "width:1000px; margin: auto; text-align: center ">
+            <h1>
+                <p></p><a href="https://www.ua.pt/">Diagnóstico</a>
+            </h1>
+        </div>
+        <div style="height: 40px;width:650px; float:right; margin: 20px 0px">
+            <div style="width: 300px; float:left; margin-right: 15px">
+                    Máquina:
+                    <select name="máquina" id="máquina">
+                        <option value="1"> Retificadora </option>
+                        <option value="2"> Plana </option>
+                        <option value="3"> Torno </option>
+                        <option value="4"> Fresadora </option>
+                        <option value="5"> CNC </option>
+                        <option value="6"></option>
+                        <option value="" selected>Selecione a Máquina</option>
+                    </select>
+            </div>
+            <div style="width: 300px; float:left">
+                    Sensor:
+                    <select name="sensor" id="sensor">
+                        <option value="1"> Temperatura </option>
+                        <option value="2"> Ruído </option>
+                        <option value="3"> Vibração </option>
+                        <option value="4"> Pressão </option>
+                        <option value="5"> Caudal </option>
+                        <option value="6"></option>
+                        <option value="" selected>Selecione o tipo de dados</option>
+                    </select>
+            </div>
+        </div>
+        <div style="width:900px; margin: auto">
+            <canvas class="line-chart"></canvas>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+            <script>
+                var ctx = document.getElementsByClassName("line-chart");
+                var chartGraph = new Chart(ctx, {
+                     type: 'line',
+                     data: {
+                         labels:["Janeiro", "Fevereiro", "Março", "Abril"],
+                         datasets: [{
+                             label: "Temperatura",
+                             labelWidth: 10,
+                             data: [10, 5, 6, 9, 10, 15, 2, 5, 20, 4],
+                             borderWidth: 2,
+                             borderColor: 'orange',
+                             backgroundColor: 'transparent'
+                         }]
+                     }
+                });
+            </script>
+        </div>
+    </body>
+</html>
