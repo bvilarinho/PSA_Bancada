@@ -67,5 +67,18 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
 
 1 de Abril 2022 início da elaboração da aplicação (Carlos)
 
+8/4 apresentação:
 
+-caudalímetro: ver documentação do email do professor
+
+-possibilidade de usar note-red para criar a aplicação
+
+-ganho temp=400, R1 470 R2 220k
+
+-tarefas próxima semana:
+  -Medir temperatura(simular avaria)
+  -circuito caudalimetro
+  -Estrutura Base de Dados
+  -Definir algoritmo Machine Learning
+  -Comunicação com o esp com MQTT(documentação de IEA)
 
