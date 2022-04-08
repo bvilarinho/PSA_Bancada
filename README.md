@@ -77,8 +77,8 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
 
 -tarefas próxima semana:
   -Medir temperatura(simular avaria)
-  -circuito caudalimetro
+  -circuito caudalimetro[ivan]
   -Estrutura Base de Dados
-  -Definir algoritmo Machine Learning
+  -Definir algoritmo Machine Learning [bruno]
   -Comunicação com o esp com MQTT(documentação de IEA)
 
