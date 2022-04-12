@@ -97,3 +97,7 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
 -transferir dados (esp -> PC) com MQTT
 
 -Dissertação sobre base de dados e machine learning - Pedro Limas
+
+
+- Codigo caudalímetro leitura dos pulsos [Ivan]
+  https://blog.adafruit.com/2018/12/27/frequency-measurement-on-an-esp32-in-micropython-esp32-micropython-python/
