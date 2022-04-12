@@ -67,5 +67,37 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
 
 1 de Abril 2022 início da elaboração da aplicação (Carlos)
 
+8/4 apresentação:
+
+-caudalímetro: ver documentação do email do professor
+
+-possibilidade de usar note-red para criar a aplicação
+
+-ganho temp=400, R1 470 R2 220k
+
+-tarefas próxima semana:
+  -Medir temperatura(simular avaria)
+  -circuito caudalimetro[ivan]
+  -Estrutura Base de Dados
+  -Definir algoritmo Machine Learning [bruno]
+  -Comunicação com o esp com MQTT(documentação de IEA)
+
+-tarefas para 22/4: [Ivan]
+
+-especificar tabela dos sensores(tipo de termopar, gama, casas decimais, ensaios)
+
+-caudalimetro a ler valores
+
+-machine learning
+
+-tabela de componentes a ensaiar
+
+-consumo eletrico (V,I,Freq)
+
+-transferir dados (esp -> PC) com MQTT
+
+-Dissertação sobre base de dados e machine learning - Pedro Limas
 
 
+- Codigo caudalímetro leitura dos pulsos [Ivan]
+  https://blog.adafruit.com/2018/12/27/frequency-measurement-on-an-esp32-in-micropython-esp32-micropython-python/
