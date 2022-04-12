@@ -88,6 +88,8 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
 
 -caudalimetro a ler valores
 
+-machine learning
+
 -tabela de componentes a ensaiar
 
 -consumo eletrico (V,I,Freq)
