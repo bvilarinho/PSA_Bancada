@@ -82,3 +82,16 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
   -Definir algoritmo Machine Learning [bruno]
   -Comunicação com o esp com MQTT(documentação de IEA)
 
+-tarefas para 22/4: [Ivan]
+
+-especificar tabela dos sensores(tipo de termopar, gama, casas decimais, ensaios)
+
+-caudalimetro a ler valores
+
+-tabela de componentes a ensaiar
+
+-consumo eletrico (V,I,Freq)
+
+-transferir dados (esp -> PC) com MQTT
+
+-Dissertação sobre base de dados e machine learning - Pedro Limas
