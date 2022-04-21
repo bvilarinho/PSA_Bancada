@@ -102,3 +102,5 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
   https://blog.adafruit.com/2018/12/27/frequency-measurement-on-an-esp32-in-micropython-esp32-micropython-python/
 
 -Choosing the Most Suitable Predictive Maintenance Sensor: https://www.analog.com/en/technical-articles/choosing-the-most-suitable-predictive-maintenance-sensor.html [Ivan]
+
+-21/04 codigos para varios sensores ESP32 https://www.slideshare.net/fanghe22/get-started-with-micropython-esp32 [Ivan]
