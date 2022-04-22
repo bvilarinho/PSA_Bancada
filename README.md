@@ -104,3 +104,11 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
 -Choosing the Most Suitable Predictive Maintenance Sensor: https://www.analog.com/en/technical-articles/choosing-the-most-suitable-predictive-maintenance-sensor.html [Ivan]
 
 -21/04 codigos para varios sensores ESP32 https://www.slideshare.net/fanghe22/get-started-with-micropython-esp32 [Ivan]
+
+-22/04 apresentação:
+  -machine learning: ter gama de valores  -km0 e ver valores reais
+  -MQTT (easy MQTT, MQTT box) - comunicar com o pc
+  -caudal- medir os impulsos num determinado intervalo de tempo
+  -integrar tudo
+  -fazer funções de conversão etc...
+  -3 máquinas
