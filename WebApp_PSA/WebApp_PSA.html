@@ -23,6 +23,18 @@
             console.log(err)
         });
     }
+
+    function enviarDados() {
+        var maquina = document.getElementById("maquinas").options[document.getElementById("maquinas").selectedIndex].value;
+        var dispositivos = document.getElementById("dispositivos").options[document.getElementById("dispositivos").selectedIndex].value;
+        var tipoSensor = document.getElementById("tipoSensor").options[document.getElementById("tipoSensor").selectedIndex].value;
+        $.get("http://localhost:3000/getInfoDB/" + maquina + "/" + dispositivos + "/" + tipoSensor, function (data, status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        }).fail(function(err){
+            alert("Erro: " + err.status + " | " + err.statusText);
+            console.log(err)
+        });
+    }
 </script>
 
 <body>
@@ -77,7 +89,7 @@
                 <b> Obervações: </b>
             </div>
             <div style="margin: 10px 0px 0px 10px">
-                <input id="observaçoes" type="text" size="28"  height="10" minlength="0" maxlength="300">
+                <input id="observacoes" type="text" size="28"  height="10" minlength="0" maxlength="300">
             </div>
             <div style="width: 210px; margin: 10px 0px 0px 10px">
                 <button style="color:blue" type="button" onclick="enviarDados()"> Send </button>

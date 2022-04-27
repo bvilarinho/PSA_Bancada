@@ -3,7 +3,7 @@ from time import sleep
 
 aux = True
 
-pot = ADC(Pin(33))
+pot = ADC(Pin(28))
 pot.atten(ADC.ATTN_11DB)
 pot.width(ADC.WIDTH_12BIT)
 
