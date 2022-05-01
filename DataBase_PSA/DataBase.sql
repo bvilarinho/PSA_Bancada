@@ -62,6 +62,13 @@ CREATE TABLE `observacoes` (
   `data_observacao` timestamp
 );
 
+CREATE TABLE `quilometro_0` (
+  `id_maq` int,
+  `id_componente` int,
+  `valores` int,
+  `data_observacao` timestamp
+);
+
 ALTER TABLE `maquinas` ADD FOREIGN KEY (`id_maq`) REFERENCES `componentes` (`id_maq`);
 
 ALTER TABLE `componentes` ADD FOREIGN KEY (`id_componente`) REFERENCES `dados` (`id_componente`);
@@ -73,3 +80,5 @@ ALTER TABLE `componentes` ADD FOREIGN KEY (`id_componente`) REFERENCES `manutenc
 ALTER TABLE `componentes` ADD FOREIGN KEY (`id_componente`) REFERENCES `avarias` (`id_componente`);
 
 ALTER TABLE `componentes` ADD FOREIGN KEY (`id_componente`) REFERENCES `observacoes` (`id_componente`);
+
+ALTER TABLE `componentes` ADD FOREIGN KEY (`id_componente`) REFERENCES `quilometro_0` (`id_componente`);
