@@ -14,9 +14,9 @@
 <script>
     function atualizarDados() {
         var maquina = document.getElementById("maquinas").options[document.getElementById("maquinas").selectedIndex].value;
-        var dispositivos = document.getElementById("dispositivos").options[document.getElementById("dispositivos").selectedIndex].value;
+        var componentes = document.getElementById("componentes").options[document.getElementById("componentes").selectedIndex].value;
         var tipoSensor = document.getElementById("tipoSensor").options[document.getElementById("tipoSensor").selectedIndex].value;
-        $.get("http://localhost:3000/getInfoDB/" + maquina + "/" + dispositivos + "/" + tipoSensor, function (data, status) {
+        $.get("http://localhost:3000/getInfoDB/" + maquina + "/" + componentes + "/" + tipoSensor, function (data, status) {
             alert("Data: " + data + "\nStatus: " + status);
         }).fail(function(err){
             alert("Erro: " + err.status + " | " + err.statusText);
@@ -26,9 +26,9 @@
 
     function enviarDados() {
         var maquina = document.getElementById("maquinas").options[document.getElementById("maquinas").selectedIndex].value;
-        var dispositivos = document.getElementById("dispositivos").options[document.getElementById("dispositivos").selectedIndex].value;
+        var componentes = document.getElementById("componentes").options[document.getElementById("componentes").selectedIndex].value;
         var tipoSensor = document.getElementById("tipoSensor").options[document.getElementById("tipoSensor").selectedIndex].value;
-        $.get("http://localhost:3000/getInfoDB/" + maquina + "/" + dispositivos + "/" + tipoSensor, function (data, status) {
+        $.get("http://localhost:3000/getInfoDB/" + maquina + "/" + componentes + "/" + tipoSensor, function (data, status) {
             alert("Data: " + data + "\nStatus: " + status);
         }).fail(function(err){
             alert("Erro: " + err.status + " | " + err.statusText);
@@ -50,26 +50,28 @@
             <div style="width: 210px; height: 70px; margin: 10px 10px 0px 10px">
                 <label style="font-weight: bolder;" for="maquinas">Escolha uma máquina:</label>
                 <select name="maquinas" id="maquinas">
-                    <option value="cnc">CNC</option>
-                    <option value="fresadora">Fresadora</option>
-                    <option value="retificadora">Retificadora</option>
-                    <option value="torno">Torno</option>
-                    <option value="plana">Plana</option>
+                    <option value="tapete">Tapete</option>
+                    <option value="central hidraulica ">Central Hidráulica</option>
+                    <option value="mesa gravacao a laser">Mesa Gravação a Laser</option>
                 </select>
             </div>
             <div style="width: 210px; height: 70px; margin: 10px 10px 0px 10px">
-                <label style="font-weight: bolder;" for="dispositivos">Escolha um dispositivo:</label>
-                <select name="dispositivos" id="dispositivos">
-                    <option value="motor">Motor</option>
-                    <option value="valvulas">Válvulas</option>
-                    <option value="servos">ServoMecanismos</option>
+                <label style="font-weight: bolder;" for="componentes">Escolha um componente:</label>
+                <select name="componentes" id="componentes">
+                    <option value="estrutura">Estrutura</option>
+                    <option value="motor ac">Motor AC</option>
                 </select>
             </div>
             <div style="width: 210px; height: 70px; margin: 10px 10px 0px 10px">
                 <label style="font-weight: bolder;" for="tipoSensor">Escolha um tipo de dados:</label>
                 <select name="tipoSensor" id="tipoSensor">
-                    <option value="caudalimetro">Caudal</option>
-                    <option value="termopar">Temperatura</option>
+                    <option value="caudal">Caudal</option>
+                    <option value="temperatura">Temperatura</option>
+                    <option value="pressao">Pressão</option>
+                    <option value="vibracao">Vibração</option>
+                    <option value="ruido">Ruido</option>
+                    <option value="qualidade do ar">Qualidade do Ar</option>
+                    <option value="co2">Níveis de CO2</option>
                 </select>
             </div>
             <div style="width: 210px; height: 25px; margin: 10px 10px 10px 10px">
