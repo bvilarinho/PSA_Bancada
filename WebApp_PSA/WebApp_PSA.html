@@ -45,7 +45,10 @@
         </div>
     </nav>
     <div class="topper">
-        <div id="curve_chart"></div>
+        <div>
+            <h3 style="text-align: center; width:300px; margin-top:-400px; margin-left: 575px; display: block"> Dados dos sensores </h3>
+        </div>
+        <div style="margin-left:-850px" id="curve_chart"></div>
         <div class="options" style="width: 230px; margin: 0px 150px 0px 0px">
             <div style="width: 210px; height: 70px; margin: 10px 10px 0px 10px">
                 <label style="font-weight: bolder;" for="maquinas">Escolha uma máquina:</label>
@@ -152,7 +155,6 @@
             ]);
 
             var options = {
-                title: 'Dados Sensores',
                 curveType: 'function',
                 titleTextStyle: { fontSize: '25' },
                 legend: { position: 'right' }
@@ -163,3 +165,5 @@
             chart.draw(data, options);
         }
 </script>
+
+title: 'Dados Sensores',

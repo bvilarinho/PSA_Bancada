@@ -16,14 +16,18 @@
 
 .topper{
     padding-top:50px;
+    height:1000px;
     align-items: center;
     display: flex;
     background-color: white;
 }
+.topper h3{
+    align-items: center;
+    display: flex;
+}
 .topper #curve_chart{
     height: 700px;
     width: 1200px;
-    padding-left: 0px;
 }
 .topper .options{
     display: grid;
