@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebApp Diagnóstico</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" rel="stylesheet"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <script>
@@ -40,16 +40,34 @@
 <body>
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <div class="container">
-            <h1 class="header" style="padding-top:10px; margin-left:300px">Diagnóstico</h1>
-            <h1><img class="header" style="margin-right:100px; height: 50px" src="logo.svg" alt=""></h1>
+            <div style="float: left; margin-left:100px">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#dados">Dados dos sensores</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#detalhes">Detalhes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#observações">Observações anteriores</a>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+            <h1 class="header" style="padding-top:10px">Diagnóstico</h1>
+            <h1><img class="header" style="height: 50px; margin-left:550px; margin-right:150px" src="logo.svg" alt=""></h1>
         </div>
     </nav>
-    <div class="topper">
+    <div class="topper" id="dados">
         <div>
             <h3 style="text-align: center; width:300px; margin-top:-400px; margin-left: 575px; display: block"> Dados dos sensores </h3>
         </div>
         <div style="margin-left:-850px;" id="curve_chart"></div>
-        <div class="options" style="border: 1px solid black; width: 300px; margin: 0px 150px 0px 0px">
+        <div class="options" style="width: 300px; margin: 0px 150px 0px 0px">
             <div style="width: 210px; height: 70px; margin: 10px 10px 0px 10px">
                 <label style="font-weight: bolder;" for="maquinas">Escolha uma máquina:</label>
                 <select name="maquinas" id="maquinas">
@@ -101,11 +119,22 @@
             </div>
         </div>
     </div>
-    <div class="middle">
+    <div class="middle" id="detalhes">
         <div>
             <h3 style="text-align: center; margin: auto; padding-top:50px; display: block"> Detalhes </h3>
         </div>
-        <div style="float:left; height: 200px; width: 580px; padding-top:50px; margin-left:100px; margin-bottom:50px">
+        <div style="float:left; height: 200px; width: 425px; padding-top:50px; margin-left:0px; margin-bottom:50px">
+            <div>
+                <img src="info.png" alt="Alertas" width="100" height="100" style="margin:auto; display: block">
+            </div>
+            <div style="text-align: center; margin-top:30px">
+                <h4> Informações </h4>
+                <h6 style="padding-top:10px"> Maquina: </h6>
+                <h6 style="padding-top:1px"> Componente: </h6>
+                <h6 style="padding-top:1px"> ID: </h6>
+            </div>
+        </div>
+        <div style="float:right; height: 200px; width: 400px; padding-top:50px; margin-left:px; margin-bottom:50px">
             <div>
                 <img src="alerta.png" alt="Alertas" width="100" height="100" style="margin:auto; display: block">
             </div>
@@ -114,7 +143,7 @@
                 <h6 style="padding-top:10px"> Temperatura alta !! </h6>
             </div>
         </div>
-        <div style="float:right; height: 200px; width: 580px; padding-top:50px; margin-right:100px">
+        <div style="float:left; height: 200px; width: 580px; padding-top:50px; margin-right:0px">
             <div>
                 <img src="Manutenção.png" alt="Manutenção" width="100" height="100" style="margin:auto; display: block">
             </div>
@@ -130,8 +159,10 @@
             </div>
         </div>
     </div>
-    <div class="bottom" style="height:300px;">
-        <h3 style="margin: auto; margin-top:50px"> Observações anteriores </h3>
+    <div class="bottom" style="height:400px" id="observações">
+        <div>
+            <h3 style="text-align: center; padding-top:50px; margin-top:-200px; margin-left:560px; display: block"> Observações anteriores </h3>
+        </div>
     </div>
     <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <div class="container">
@@ -165,5 +196,3 @@
             chart.draw(data, options);
         }
 </script>
-
-title: 'Dados Sensores',
