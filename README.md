@@ -112,3 +112,12 @@ https://www.figma.com/team_invite/redeem/k5O3XqHzFIR7mIuvUKsokv
   -integrar tudo
   -fazer funções de conversão etc...
   -3 máquinas
+
+----------------------------Aplicação WEB ---------------------- 
+IMPORTANTE
+ficheiros -> colocar na paste htdocs do XAMPP
+index.php = codigo HTML pagina Home
+dashboard.php = codigo HTML pagina Dashboard
+add.php = codigo HTML pagina Add
+data.php = configuração dos butoes em php do dashboard
+insert.php = configuração dos butoes em php do add
