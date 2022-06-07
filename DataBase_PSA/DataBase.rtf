@@ -14,17 +14,12 @@
 \}\
 \
 Table componentes \{\
+  id_maq int\
   id_componente int [pk, increment]\
   nome varchar\
   descricao varchar\
-  temperatura int\
-  lim_temp int\
-  caudal int\
-  lim_caudal int\
-  pressao int\
-  lim_pressao int\
   data timestamp\
-  id_maq int\
+\
 \}\
 \
 Ref: maquinas.id_maq > componentes.id_maq\
@@ -33,8 +28,9 @@ Table dados \{\
   id_componente int\
   id_sensor int\
   temperatura int\
-  caudal int \
-  pressao int\
+  humidade int \
+  vibracao int\
+  ruido int\
   data timestamp \
 \}\
 \
@@ -55,20 +51,22 @@ Table manutencoes \{\
   id_manutencao int\
   id_componente int\
   detalhes varchar\
-  data_manutencao_feita timestamp\
   data_manutencao_marcada timestamp\
+  data_manutencao_feita timestamp\
+\
 \}\
 \
 Ref: componentes.id_componente > manutencoes.id_componente\
 \
 Table avarias \{\
   id_avaria int\
+  id_maq int\
   id_componente int\
   problema varchar\
   data_problema timestamp\
+  por_resolver boolean\
   resolucao varchar\
   data_resolucao timestamp \
-  por_resolver boolean\
 \}\
 \
 Ref: componentes.id_componente > avarias.id_componente\
