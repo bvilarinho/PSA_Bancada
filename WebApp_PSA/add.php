@@ -105,7 +105,7 @@
                 <div class="card-body">
                     <div  class="card-body">
                         <center>
-                            <h4 style="text-align:center, margin-bottom:30px">Adicione um componente à base de dados</h4>
+                            <h4 style="text-align:center; margin-bottom: 30px">Adicione um componente à base de dados</h4>
                             <p></p>
                         </center>
                     </div>
@@ -126,16 +126,16 @@
                         </div>
                         <div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="temperatura" name="checkbox1[]" id="sensor1" checked>Temperatura
+                                <input class="form-check-input" type="checkbox" value="1" name="temperatura1" id="temperatura1" checked>Temperatura
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="humidade" name="checkbox1[]" id="sensor1">Humidade
+                                <input class="form-check-input" type="checkbox" value="1" name="humidade1" id="humidade1">Humidade
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="vibracao" name="checkbox1[]" id="sensor1">Vibração
+                                <input class="form-check-input" type="checkbox" value="1" name="vibracao1" id="vibracao1">Vibração
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="ruido" name="checkbox1[]" id="senso1r">Ruído
+                                <input class="form-check-input" type="checkbox" value="1" name="ruido1" id="ruido1">Ruído
                             </div>
                         </div>
                     </div>
@@ -156,16 +156,16 @@
                         </div>
                         <div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="temperatura2" name="checkbox2[]" checked>Temperatura
+                                <input class="form-check-input" type="checkbox" value="1" id="temperatura2" name="temperatura2" checked>Temperatura
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="humidade2" name="checkbox2[]">Humidade
+                                <input class="form-check-input" type="checkbox" value="1" id="humidade2" name="humidade2">Humidade
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="vibracao2" name="checkbox2[]">Vibração
+                                <input class="form-check-input" type="checkbox" value="1" id="vibracao2" name="vibracao2">Vibração
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="ruido2" name="checkbox2[]">Ruído
+                                <input class="form-check-input" type="checkbox" value="1" id="ruido2" name="ruido2">Ruído
                             </div>
                         </div>
                     </div>
@@ -186,16 +186,16 @@
                         </div>
                         <div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="temperatura3" name="checkbox3[]" checked>Temperatura
+                                <input class="form-check-input" type="checkbox" value="1" id="temperatura3" name="temperatura3" checked>Temperatura
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="humidade3" name="checkbox3[]">Humidade
+                                <input class="form-check-input" type="checkbox" value="1" id="humidade3" name="humidade3">Humidade
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="vibracao3" name="checkbox3[]">Vibração
+                                <input class="form-check-input" type="checkbox" value="1" id="vibracao3" name="vibracao3">Vibração
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="ruido3" name="checkbox3[]">Ruído
+                                <input class="form-check-input" type="checkbox" value="1" id="ruido3" name="ruido3">Ruído
                             </div>
                         </div>
                     </div>

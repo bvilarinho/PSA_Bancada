@@ -14,7 +14,7 @@
     <script src="https://kit.fontawesome.com/9d1d9a82d2.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <title>Insert Page</title>
+    <title>Data PAge</title>
 </head>
 
 <body>
@@ -66,34 +66,23 @@
                 . mysqli_connect_error());
         }
 
+        $obs = $_REQUEST['observacoes'];
+        $man = $_REQUEST['manutencoes'];
+
         switch($_REQUEST['subject']) {
             case 'submit1':
-                $sql5 = "INSERT INTO observacoes (observacoes) VALUES ('$_REQUEST['observacoes']')";
-                if(mysqli_query($conn, $sql5)){
-                    echo "<h3>Dados guardados com sucesso</h3>";
-
-                    echo nl2br("\n$observacoes\n");
-                } else{
-                    echo "<h3>Obrigatório preencher toda a informação sobre a maquina."
-                        ."</h3>";
-                }
+                $sql5 = "INSERT INTO observacoes (observacoes) VALUES ('$obs')";
+                mysqli_query($conn, $sql5);
 
             case 'submit2':
-                $sql6 = "INSERT INTO manutencoes (manutencoes) VALUES ('$_REQUEST['manutencoes']')";
-                mysqli_query($conn, $sql6)
-                if(mysqli_query($conn, $sql5)){
-                    echo "<h3>Dados guardados com sucesso</h3>";
-
-                    echo nl2br("\n$manutencoes\n");
-                } else{
-                    echo "<h3>Obrigatório preencher toda a informação sobre a maquina."
-                        ."</h3>";
-                }
+                $sql6 = "INSERT INTO manutencoes (manutencoes) VALUES ('$man')";
+                mysqli_query($conn, $sql6);
         }
 
         //Close connection
         mysqli_close($conn);
         ?>
+        
     </center>
     <nav class="navbar navbar-dark bg-dark text-white">
         <div class="container">

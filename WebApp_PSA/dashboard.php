@@ -69,29 +69,19 @@
                     </div>
                     <div class="card-body">
                         <div class="container options">
-                            <div class="container pt-3" style="float left">
-                                <label style="font-weight: bolder;" for="maquinas">Escolha uma máquina:</label>
-                                <p><select name="maquinas" id="maquinas">
-                                    <option value="tapete">Tapete</option>
-                                    <option value="central hidraulica ">Central Hidráulica</option>
-                                    <option value="mesa gravacao a laser">Mesa Gravação a Laser</option>
-                                </select></p>
+                            <div class="container pt-4" style="float: left">
+                                <label style="font-weight: bolder;" for="id_maq">ID Máquina:</label>
+                                    <p>
+                                        <input type="number" name="id_maq" id="id_maq" size="40"  height="10" minlength="0" maxlength="300" >
+                                    </p>
                             </div>
-                            <div class="container pt-3" style="float left">
-                                <label style="font-weight: bolder;" for="componentes">Escolha um componente:</label>
-                                <p><select name="componentes" id="componentes">
-                                    <option value="estrutura">Estrutura</option>
-                                    <option value="motor ac">Motor AC</option>
-                                </select></p>
+                            <div class="container pt-4" style="float: left">
+                                <label style="font-weight: bolder;" for="id_comp">ID Componente:</label>
+                                    <p>
+                                        <input type="number" name="id_comp" id="id_comp" size="40"  height="10" minlength="0" maxlength="300" >
+                                    </p>
                             </div>
-                            <div class="container pt-3" style="float left">
-                                <label style="font-weight: bolder;" for="componentes">ID:</label>
-                                <p><select name="id_generico" id="id_generico">
-                                    <option value=".">.</option>
-                                    <option value=".">.</option>
-                                </select></p>
-                            </div>
-                            <div class="container pt-3" style="float left">
+                            <div class="container pt-4" style="float: left">
                                 <label style="font-weight: bolder;" for="tipoSensor">Escolha um tipo de dados:</label>
                                 <p><select name="tipoSensor" id="tipoSensor">
                                     <option value="temperatura">Temperatura</option>
@@ -101,19 +91,21 @@
                                 </select></p>
                             </div>
                             </div>
-                            <div class="container pt-3" style="width: 260px; float:left">
-                                <div style="float:left; text-align: center; margin-bottom:7px">
+                            <div class="container pt-4" style="width: 260px; float:center">
+                                <div style="float:left; text-align: center; margin-bottom:10px; margin-top:22px">
                                     <b> Início: </b>
                                     <p><input id="data_inicio" type="date"></p>
                                 </div>
-                                <div style="float:right; text-align: center; margin-bottom:7px">
+                                <div style="float:right; text-align: center; margin-bottom:10px; margin-top:22px">
                                     <b> Fim: </b>
                                     <p><input id="data_fim" type="date"></p>
                                 </div>
                             </div>
-                            <div class="container pt-3" style="float:left">
-                                <p><button style="color:blue" type="button" onclick="atualizarDados()">Atualizar Dados</button></p>
+                        <center>
+                            <div class="container pt-4" style="float:left">
+                                <p><input style="margin-top:22px" type="submit" value="Atualizar"></p>
                             </div>
+                        </center>
                         </div>
                     </div>
                 </div>
@@ -132,7 +124,7 @@
                                     <h5 class="text-uppercase text-center text-muted mb-5">
                                         Informações
                                     </h5>
-                                    <p><span class="h6"> Máquina: </span>
+                                    <p><span class="h6"> Máquina: <?php echo "OLA";?> </span>
                                     <p><span class="h6"> Componente: </span>
                                     <p><span class="h6"> Nome: </span>
                                     <p><span class="h6"> ID: </span>
@@ -155,12 +147,14 @@
                                         Manutenções
                                     </h5>
                                     <div>
-                                        <p><span class="text-center h6"> Última Manutenção: </span>
-                                        <p><span class="text-center h6"> DD/MM/AA </span>
-                                        <p><span class="text-center h6"> Reparação </span>
-                                        <p><span class="text-center h6"> Próxima Manutenção: </span>
-                                        <p><span class="text-center h6"> DD/MM/AA </span>
-                                        <p><span class="text-center h6"> Rotina </span>
+                                        <center>
+                                            <p><span class="text-center h6"> Última Manutenção: </span>
+                                            <p><span class="text-center h6"> DD/MM/AA </span>
+                                            <p><span class="text-center h6"> Rotina </span>
+                                            <p><span class="text-center h6"> Próxima Manutenção: </span>
+                                            <p><span class="text-center h6"> DD/MM/AA </span>
+                                            <p><span class="text-center h6"> Reparação </span>
+                                        </center>
                                     </div>
                                 </div>
                             </div>
@@ -254,7 +248,7 @@
                                     <form action="data.php" method="get">
                                     <div class="container mb-2" style="float:left">
                                         <center>
-                                            <button style="margin-top:20px" name="subject" type="submit" value="observacoes">Submit</button>
+                                            <button style="margin-top:20px" name="subject" type="submit" value="submit1">Submit</button>
                                         </center>
                                     </div>
                                     </form>
@@ -278,7 +272,6 @@
                                     <tr>
                                         <th><a class="text-uppercase text-center text-muted" data-sort="goal-data"> Data </a></th>
                                         <th><a class="text-uppercase text-center text-muted" data-sort="goal-descricao"> Descrição </a></th>
-                                        <th><a class="text-uppercase text-center text-muted" data-sort="goal-tipo"> Tipo </a></th>
                                     </tr>
                                     </thead>
                                     <tbody class="list">
@@ -287,31 +280,26 @@
                                             <time datetime="2018-10-24"> 07/04/18 </time>
                                         </td>
                                         <td class="goal-descricao"> Descrição </td>
-                                        <td class="goal-tipo"> Rotina </td>
                                     </tr><tr>
                                         <td class="goal-data">
                                             <time datetime="2018-10-24"> 07/05/18 </time>
                                         </td>
                                         <td class="goal-descricao"> Descrição </td>
-                                        <td class="goal-tipo"> Rotina </td>
                                     </tr><tr>
                                         <td class="goal-data">
                                             <time datetime="2018-10-24"> 07/06/18 </time>
                                         </td>
                                         <td class="goal-descricao"> Descrição </td>
-                                        <td class="goal-tipo"> Rotina </td>
                                     </tr><tr>
                                         <td class="goal-data">
                                             <time datetime="2018-10-24"> 07/07/18 </time>
                                         </td>
                                         <td class="goal-descricao"> Descrição </td>
-                                        <td class="goal-tipo"> Reparação </td>
                                     </tr><tr>
                                         <td class="goal-data">
                                             <time datetime="2018-10-24"> 07/08/18 </time>
                                         </td>
                                         <td class="goal-descricao"> Descrição </td>
-                                        <td class="goal-tipo"> Rotina </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -325,20 +313,10 @@
                                         </p>
                                     </div>
                                     </form>
-                                    <div class="dropdown" style="float: right; margin-top:-50px; margin-right:50px">
-                                        <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Tipo
-                                            <i class="fe fe-more-vertical"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="#!" class="dropdown-item"> Rotina </a>
-                                            <a href="#!" class="dropdown-item"> Reparação </a>
-                                        </div>
-                                    </div>
                                     <form action="data.php" method="get">
                                     <div class="container mb-2" style="float:left">
                                         <center>
-                                            <button style="margin-top:20px" name="subject" type="submit" value="manutencoes">Submit</button>
+                                            <button style="margin-top:20px" name="subject" type="submit" value="submit2">Submit</button>
                                         </center>
                                     </div>
                                     </form>
@@ -390,7 +368,7 @@
             height:25%;
         }
 </style>
-  <script>
+<script>
     function atualizarDados() {
         var maquina = document.getElementById("maquinas").options[document.getElementById("maquinas").selectedIndex].value;
         var componentes = document.getElementById("componentes").options[document.getElementById("componentes").selectedIndex].value;

@@ -74,17 +74,65 @@
         $id_comp1 =  $_REQUEST['id_comp1'];
         $nome_comp1 = $_REQUEST['nome_comp1'];
         $descricao_comp1 =  $_REQUEST['descricao_comp1'];
+        $checkbox1_1 = $_REQUEST['temperatura1'];
+        $checkbox1_2 = $_REQUEST['humidade1'];
+        $checkbox1_3 = $_REQUEST['vibracao1'];
+        $checkbox1_4 = $_REQUEST['ruido1'];
 
         $id_comp2 =  $_REQUEST['id_comp2'];
         $nome_comp2 = $_REQUEST['nome_comp2'];
         $descricao_comp2 =  $_REQUEST['descricao_comp2'];
+        $checkbox2_1 = $_REQUEST['temperatura2'];
+        $checkbox2_2 = $_REQUEST['humidade2'];
+        $checkbox2_3 = $_REQUEST['vibracao2'];
+        $checkbox2_4 = $_REQUEST['ruido2'];
 
         $id_comp3 =  $_REQUEST['id_comp3'];
         $nome_comp3 = $_REQUEST['nome_comp3'];
         $descricao_comp3 =  $_REQUEST['descricao_comp3'];
+        $checkbox3_1 = $_REQUEST['temperatura3'];
+        $checkbox3_2 = $_REQUEST['humidade3'];
+        $checkbox3_3 = $_REQUEST['vibracao3'];
+        $checkbox3_4 = $_REQUEST['ruido3'];
 
-        //$dados[]=isset($_POST('[checkbox]'));
-        //print_r($dados);
+        $a = 0;
+
+        if(empty($checkbox1_1)){
+            $checkbox1_1 = (0);
+        }
+        if(empty($checkbox1_2)){
+            $checkbox1_2 = (0);
+        }
+        if(empty($checkbox1_3)){
+            $checkbox1_3 = (0);
+        }
+        if(empty($checkbox1_4)){
+            $checkbox1_4 = (0);
+        }
+        if(empty($checkbox2_1)){
+            $checkbox2_1 = (0);
+        }
+        if(empty($checkbox2_2)){
+            $checkbox2_2 = (0);
+        }
+        if(empty($checkbox2_3)){
+            $checkbox2_3 = (0);
+        }
+        if(empty($checkbox2_4)){
+            $checkbox2_4 = (0);
+        }
+        if(empty($checkbox3_1)){
+            $checkbox3_1 = (0);
+        }
+        if(empty($checkbox3_2)){
+            $checkbox3_2 = (0);
+        }
+        if(empty($checkbox3_3)){
+            $checkbox3_3 = (0);
+        }
+        if(empty($checkbox3_4)){
+            $checkbox3_4 = (0);
+        }
 
         $sql1 = "INSERT INTO maquinas (id_maq, nome_maq, descricao_maq) VALUES ('$id_maq',
         '$nome_maq','$descricao_maq')";
@@ -103,8 +151,8 @@
             ."</h3>";
         }else{
                 if(!empty($id_comp1)){
-                    $sql2 = "INSERT INTO componentes (id_maq, id_comp, nome_comp, descricao_comp) VALUES ('$id_maq', '$id_comp1',
-                    '$nome_comp1','$descricao_comp1')";
+                    $sql2 = "INSERT INTO componentes (id_maq, id_comp, nome_comp, descricao_comp, temperatura, humidade, vibracao, ruido) VALUES ('$id_maq', '$id_comp1',
+                    '$nome_comp1','$descricao_comp1','$checkbox1_1','$checkbox1_2','$checkbox1_3','$checkbox1_4')";
                     if(mysqli_query($conn, $sql2)){
                         echo "<h3>Dados guardados com sucesso</h3>";
 
@@ -113,13 +161,14 @@
 
                     } else{
                         echo "ERROR: Lamentamos, algo correu mal!! $sql2. "
-                            . mysqli_error($conn);
-                    }
+                            . mysqli_error($gogn);
+                    }                    
+
                 }
 
                 if(!empty($id_comp2)){
-                    $sql3 = "INSERT INTO componentes (id_maq, id_comp, nome_comp, descricao_comp) VALUES ('$id_maq', '$id_comp2',
-                    '$nome_comp2','$descricao_comp2')";
+                    $sql3 = "INSERT INTO componentes (id_maq, id_comp, nome_comp, descricao_comp, temperatura, humidade, vibracao, ruido) VALUES ('$id_maq', '$id_comp2',
+                    '$nome_comp2','$descricao_comp2','$checkbox2_1','$checkbox2_2','$checkbox2_3','$checkbox2_4')";
 
                     if(mysqli_query($conn, $sql3)){
                         echo "<h3>Dados guardados com sucesso</h3>";
@@ -133,8 +182,8 @@
                 }
 
                 if(!empty($id_comp3)){
-                    $sql4 = "INSERT INTO componentes (id_maq, id_comp, nome_comp, descricao_comp) VALUES ('$id_maq', '$id_comp3',
-                    '$nome_comp3','$descricao_comp3')";
+                    $sql4 = "INSERT INTO componentes (id_maq, id_comp, nome_comp, descricao_comp, temperatura, humidade, vibracao, ruido) VALUES ('$id_maq', '$id_comp3',
+                    '$nome_comp3','$descricao_comp3','$checkbox3_1','$checkbox3_2','$checkbox3_3','$checkbox3_4')";
 
                     if(mysqli_query($conn, $sql4)){
                         echo "<h3>Dados guardados com sucesso</h3>";
@@ -151,6 +200,7 @@
         //Close connection
         mysqli_close($conn);
         ?>
+
     </center>
     <nav class="navbar navbar-dark bg-dark text-white">
         <div class="container">
