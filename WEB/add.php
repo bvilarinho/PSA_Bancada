@@ -1,3 +1,6 @@
+<?php
+    // Erros aparecerem em Pop-up 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +55,206 @@
         </div>
     </nav>
      <div class="container mt-5">
-        <form action="insert.php" method="post">
+     <?php
+        // servername => localhost
+        // username => root
+        // password => empty
+        // database name => staff
+        $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+        // Check connection
+        if($conn === false){
+            die("ERROR: Could not connect. "
+                . mysqli_connect_error());
+        }
+
+        // Taking all values from the form data (input)
+        $id_maq =  $_REQUEST['id_maq'];
+        $nome_maq = $_REQUEST['nome_maq'];
+        $descricao_maq =  $_REQUEST['descricao_maq'];
+
+        $id_comp1 =  $_REQUEST['id_comp1'];
+        $nome_comp1 = $_REQUEST['nome_comp1'];
+        $descricao_comp1 =  $_REQUEST['descricao_comp1'];
+        $checkbox1_1 = $_REQUEST['temperatura1'];
+        $checkbox1_2 = $_REQUEST['humidade1'];
+        $checkbox1_3 = $_REQUEST['vibracao1'];
+        $checkbox1_4 = $_REQUEST['ruido1'];
+
+        $id_comp2 =  $_REQUEST['id_comp2'];
+        $nome_comp2 = $_REQUEST['nome_comp2'];
+        $descricao_comp2 =  $_REQUEST['descricao_comp2'];
+        $checkbox2_1 = $_REQUEST['temperatura2'];
+        $checkbox2_2 = $_REQUEST['humidade2'];
+        $checkbox2_3 = $_REQUEST['vibracao2'];
+        $checkbox2_4 = $_REQUEST['ruido2'];
+
+        $id_comp3 =  $_REQUEST['id_comp3'];
+        $nome_comp3 = $_REQUEST['nome_comp3'];
+        $descricao_comp3 =  $_REQUEST['descricao_comp3'];
+        $checkbox3_1 = $_REQUEST['temperatura3'];
+        $checkbox3_2 = $_REQUEST['humidade3'];
+        $checkbox3_3 = $_REQUEST['vibracao3'];
+        $checkbox3_4 = $_REQUEST['ruido3'];
+
+        $a = 0;
+
+        if(empty($checkbox1_1)){
+            $checkbox1_1 = (0);
+        }
+        if(empty($checkbox1_2)){
+            $checkbox1_2 = (0);
+        }
+        if(empty($checkbox1_3)){
+            $checkbox1_3 = (0);
+        }
+        if(empty($checkbox1_4)){
+            $checkbox1_4 = (0);
+        }
+        if(empty($checkbox2_1)){
+            $checkbox2_1 = (0);
+        }
+        if(empty($checkbox2_2)){
+            $checkbox2_2 = (0);
+        }
+        if(empty($checkbox2_3)){
+            $checkbox2_3 = (0);
+        }
+        if(empty($checkbox2_4)){
+            $checkbox2_4 = (0);
+        }
+        if(empty($checkbox3_1)){
+            $checkbox3_1 = (0);
+        }
+        if(empty($checkbox3_2)){
+            $checkbox3_2 = (0);
+        }
+        if(empty($checkbox3_3)){
+            $checkbox3_3 = (0);
+        }
+        if(empty($checkbox3_4)){
+            $checkbox3_4 = (0);
+        }
+        
+        if(empty($id_comp1) && empty($id_comp2) && empty($id_comp3) ){
+            echo "<h6>Obrigatório preencher pelo menos uma dos componentes."
+            ."</h6>";
+        }else{
+            $rep1 = "SELECT id_maq FROM maquinas WHERE id_maq = ".$id_maq;
+            $result =  mysqli_query($conn, $rep1);                                             
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
+                    echo "Máquina já existe <br>";
+                    break;
+                }
+            } else {
+                $sql1 = "INSERT INTO maquinas (id_maq, nome_maq, descricao_maq) VALUES ('$id_maq',
+            '$nome_maq','$descricao_maq')";
+            
+            if(mysqli_query($conn, $sql1)){
+                echo "<h6>Máquina guardada com sucesso</h6>";
+            } else{
+                echo "Verifique se a informação inserida da máquina está correta";
+            }
+                if(!empty($id_comp1)){
+                    $sql2 = "INSERT INTO componentes (id_maq, id_comp, nome_comp, descricao_comp, temperatura, humidade, vibracao, ruido) VALUES ('$id_maq', '$id_comp1',
+                    '$nome_comp1','$descricao_comp1','$checkbox1_1','$checkbox1_2','$checkbox1_3','$checkbox1_4')";
+                    if(mysqli_query($conn, $sql2)){
+                        echo "Componente 1 guardado com sucesso";
+                    } else{
+                        echo "Verifique se a informação inserida do componente 1 está correta";
+                    }                                    
+
+                    $query1 = "CREATE TABLE `psa_bancada`.`$id_comp1` ( `data` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )";
+                    mysqli_query($conn, $query1);
+
+                    if ($checkbox1_1 != 0){
+                        $query2 = "ALTER TABLE `psa_bancada`.`$id_comp1` ADD temperatura int(100)";
+                        mysqli_query($conn, $query2);
+                    }
+                    if ($checkbox1_2 != 0){
+                        $query3 = "ALTER TABLE `psa_bancada`.`$id_comp1` ADD humidade int(100)";
+                        mysqli_query($conn, $query3);
+                    }
+                    if ($checkbox1_3 != 0){
+                        $query4 = "ALTER TABLE `psa_bancada`.`$id_comp1` ADD vibracao int(100)";
+                        mysqli_query($conn, $query4);
+                    }
+                    if ($checkbox1_4 != 0){
+                        $query5 = "ALTER TABLE `psa_bancada`.`$id_comp1` ADD ruido int(100)";
+                        mysqli_query($conn, $query5);
+                    }
+                }
+
+                if(!empty($id_comp2)){
+                    $sql3 = "INSERT INTO componentes (id_maq, id_comp, nome_comp, descricao_comp, temperatura, humidade, vibracao, ruido) VALUES ('$id_maq', '$id_comp2',
+                    '$nome_comp2','$descricao_comp2','$checkbox2_1','$checkbox2_2','$checkbox2_3','$checkbox2_4')";
+
+                    if(mysqli_query($conn, $sql3)){
+                        echo "Componente 2 guardado com sucesso";
+                    } else{
+                        echo "Verifique se a informação inserida do componente 2 está correta";
+                    }
+
+                    $query6 = "CREATE TABLE `psa_bancada`.`$id_comp2` ( `data` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )";
+                    mysqli_query($conn, $query6);
+
+                    if ($checkbox2_1 != 0){
+                        $query7 = "ALTER TABLE `psa_bancada`.`$id_comp2` ADD temperatura int(100)";
+                        mysqli_query($conn, $query7);
+                    }
+                    if ($checkbox2_2 != 0){
+                        $query8 = "ALTER TABLE `psa_bancada`.`$id_comp2` ADD humidade int(100)";
+                        mysqli_query($conn, $query8);
+                    }
+                    if ($checkbox2_3 != 0){
+                        $query9 = "ALTER TABLE `psa_bancada`.`$id_comp2` ADD vibracao int(100)";
+                        mysqli_query($conn, $query9);
+                    }
+                    if ($checkbox2_4 != 0){
+                        $query10 = "ALTER TABLE `psa_bancada`.`$id_comp2` ADD ruido int(100)";
+                        mysqli_query($conn, $query10);
+                    }
+                }
+
+                if(!empty($id_comp3)){
+                    $sql4 = "INSERT INTO componentes (id_maq, id_comp, nome_comp, descricao_comp, temperatura, humidade, vibracao, ruido) VALUES ('$id_maq', '$id_comp3',
+                    '$nome_comp3','$descricao_comp3','$checkbox3_1','$checkbox3_2','$checkbox3_3','$checkbox3_4')";
+
+                    if(mysqli_query($conn, $sql4)){
+                        echo "Componente 3 guardado com sucesso";
+                    } else{
+                        echo "Verifique se a informação inserida do componente 3 está correta";
+                    }
+
+                    $query11 = "CREATE TABLE `psa_bancada`.`$id_comp3` (`data` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )";
+                    mysqli_query($conn, $query11);
+
+                    if ($checkbox3_1 != 0){
+                        $query12 = "ALTER TABLE `psa_bancada`.`$id_comp3` ADD temperatura int(100)";
+                        mysqli_query($conn, $query12);
+                    }
+                    if ($checkbox3_2 != 0){
+                        $query13 = "ALTER TABLE `psa_bancada`.`$id_comp3` ADD humidade int(100)";
+                        mysqli_query($conn, $query13);
+                    }
+                    if ($checkbox3_3 != 0){
+                        $query14 = "ALTER TABLE `psa_bancada`.`$id_comp3` ADD vibracao int(100)";
+                        mysqli_query($conn, $query14);
+                    }
+                    if ($checkbox3_4 != 0){
+                        $query15 = "ALTER TABLE `psa_bancada`.`$id_comp3` ADD ruido int(100)";
+                        mysqli_query($conn, $query15);
+                    }
+                }
+            }    
+        }
+            
+        //Close connection
+        mysqli_close($conn);
+    ?>
+        <form action="add.php" method="post">
         <div class="row">
             <div class="col-12 col-xl-6">
                 <div class="card">
@@ -116,7 +318,7 @@
                                 <input type="number" name="id_comp1" id="id_comp1">
                             </p>
                             <p>
-                                <label for="nome_comp">Nome:</label>
+                                <label for="nome_comp1">Nome:</label>
                                 <input type="text" name="nome_comp1" id="nome_comp1">
                             </p>
                             <p>

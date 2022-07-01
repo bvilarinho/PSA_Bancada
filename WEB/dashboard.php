@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,12 +51,31 @@
             </div>
         </div>
     </nav>
+    <?php
+        // servername => localhost
+        // username => root
+        // password => empty
+        // database name => staff
+        $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+        // Check connection
+        if($conn === false){
+            die("ERROR: Could not connect. "
+                . mysqli_connect_error());
+        }
+
+        $tipo_sensor = $_POST['tipo_sensor'];
+        $id_comp = $_REQUEST['id_comp'];  
+
+        //Close connection
+        mysqli_close($conn);
+    ?>
     <div class="container mt-5">
         <div class="row">
             <div class="col-12 col-xl-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Dados dos Sensores</h4>
+                        <h4>Dados dos Sensores - <?php echo "$tipo_sensor"?></h4>
                     </div>
                     <div class="card-body">
                         <canvas id="chart"></canvas>
@@ -68,6 +88,7 @@
                         <h4 class="card-header-title">Filtros</h4>
                     </div>
                     <div class="card-body">
+                        <form action="dashboard.php" method="post">
                         <div class="container options">
                             <div class="container pt-4" style="float: left">
                                 <label style="font-weight: bolder;" for="id_maq">ID Máquina:</label>
@@ -75,37 +96,48 @@
                                         <input type="number" name="id_maq" id="id_maq" size="40"  height="10" minlength="0" maxlength="300" >
                                     </p>
                             </div>
-                            <div class="container pt-4" style="float: left">
+                            <div class="container pt-2 pb-2" style="float: left">
                                 <label style="font-weight: bolder;" for="id_comp">ID Componente:</label>
                                     <p>
                                         <input type="number" name="id_comp" id="id_comp" size="40"  height="10" minlength="0" maxlength="300" >
                                     </p>
                             </div>
-                            <div class="container pt-4" style="float: left">
-                                <label style="font-weight: bolder;" for="tipoSensor">Escolha um tipo de dados:</label>
-                                <p><select name="tipoSensor" id="tipoSensor">
-                                    <option value="temperatura">Temperatura</option>
-                                    <option value="humidade">Humidade</option>
-                                    <option value="vibracao">Vibração</option>
-                                    <option value="ruido">Ruido</option>
-                                </select></p>
-                            </div>
-                            </div>
-                            <div class="container pt-4" style="width: 260px; float:center">
-                                <div style="float:left; text-align: center; margin-bottom:10px; margin-top:22px">
-                                    <b> Início: </b>
-                                    <p><input id="data_inicio" type="date"></p>
+                            <div class="container">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="temperatura" value="Temperatura" checked>
+                                    <label class="form-check-label" for="temperatura">Temperatura</label>
                                 </div>
-                                <div style="float:right; text-align: center; margin-bottom:10px; margin-top:22px">
-                                    <b> Fim: </b>
-                                    <p><input id="data_fim" type="date"></p>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="humidade" value="Humidade">
+                                    <label class="form-check-label" for="humidade">Humidade</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="vibracao" value="Vibração">
+                                    <label class="form-check-label" for="vibracao">Vibração</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="ruido" value="Ruído">
+                                    <label class="form-check-label" for="ruido">Ruído</label>
                                 </div>
                             </div>
+                        </div>
+                        <div class="container pt-2" style="width: 260px; float:center">
+                            <div style="float:left; text-align: center; margin-bottom:10px; margin-top:22px">
+                                <b> Início: </b>
+                                <p><input name="data_inicio" id="data_inicio" type="date"></p>
+                            </div>
+                            <div style="float:right; text-align: center; margin-bottom:10px; margin-top:22px">
+                                <b> Fim: </b>
+                                <p><input name="data_fim" id="data_fim" type="date"></p>
+                            </div>
+                        </div>
                         <center>
-                            <div class="container pt-4" style="float:left">
-                                <p><input style="margin-top:22px" type="submit" value="Atualizar"></p>
+                            <div class="container pt-2" style="float:left">
+                                <p><input style="margin-top:22px" type="submit" value="Atualizar" name="Atualizar"></p>
                             </div>
                         </center>
+                        </form>
+
                         </div>
                     </div>
                 </div>
@@ -115,21 +147,115 @@
             <div class="row">
                 <div class="col-12 col-xl-4 col-xl">
                     <div class="card">
-                        <div class="card-body mb-5">
+                        <div class="card-body mb-3">
                             <div class="row align-items-center gx-0">
                                 <div class="col">
-                                    <div style="margin-bottom:27px">
+                                    <div style="margin-bottom:20px">
                                         <img src="info.png" alt="Alertas" width="100" height="100" style="margin:auto; display: block">
                                     </div>
                                     <h5 class="text-uppercase text-center text-muted mb-5">
                                         Informações
                                     </h5>
-                                    <p><span class="h6"> Máquina: <?php echo "OLA";?> </span>
-                                    <p><span class="h6"> Componente: </span>
-                                    <p><span class="h6"> Nome: </span>
-                                    <p><span class="h6"> ID: </span>
-                                    <p><span class="h6"> Características: </span>
+                                    <p><span class="h6"> Máquina:
+                                        <?php
+                                            // servername => localhost
+                                            // username => root
+                                            // password => empty
+                                            // database name => staff
+                                            $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
 
+                                            // Check connection
+                                            if($conn === false){
+                                                die("ERROR: Could not connect. "
+                                                    . mysqli_connect_error());
+                                            }
+
+                                            $id_maq =  $_REQUEST['id_maq'];
+
+                                            $sql1 = "SELECT nome_maq FROM maquinas WHERE id_maq = ".$id_maq;
+                                            $result =  mysqli_query($conn, $sql1);
+
+                                            if ($result->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $result->fetch_assoc()) {
+                                                  echo $row["nome_maq"]. "<br>";
+                                                }
+                                            } else {
+                                                echo "0 resultados";
+                                            }
+
+                                            //Close connection
+                                            mysqli_close($conn);
+                                        ?>
+                                        </span>
+                                    <p><span class="h6"> Componente:
+                                        <?php
+                                            // servername => localhost
+                                            // username => root
+                                            // password => empty
+                                            // database name => staff
+                                            $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+                                            // Check connection
+                                            if($conn === false){
+                                                die("ERROR: Could not connect. "
+                                                    . mysqli_connect_error());
+                                            }
+
+                                            $id_comp =  $_REQUEST['id_comp'];
+
+                                            $sql2 = "SELECT nome_comp FROM componentes WHERE id_comp = ".$id_comp;
+
+                                            $result1 =  mysqli_query($conn, $sql2);
+                                            if ($result1->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $result1->fetch_assoc()) {
+                                                echo $row["nome_comp"]. "<br>";
+                                                }
+                                            } else {
+                                                echo "0 resultadoss";
+                                            }
+                                            //Close connection
+                                            mysqli_close($conn);
+                                        ?>
+                                        </span>
+                                    <p><span class="h6"> ID:
+                                        <?php
+                                            $id_maq =  $_REQUEST['id_maq'];
+                                            $id_comp =  $_REQUEST['id_comp'];
+                                            echo "$id_maq - $id_comp";
+                                        ?>
+                                        </span>
+                                    <p><span class="h6"> Características: </span>
+                                        <?php
+                                            // servername => localhost
+                                            // username => root
+                                            // password => empty
+                                            // database name => staff
+                                            $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+                                            // Check connection
+                                            if($conn === false){
+                                                die("ERROR: Could not connect. "
+                                                    . mysqli_connect_error());
+                                            }
+
+                                            $id_comp = $_REQUEST['id_comp'];
+
+                                            $sql3 = "SELECT descricao_comp FROM componentes WHERE id_comp = ".$id_comp;
+
+                                            $result2 =  mysqli_query($conn, $sql3);
+                                            if ($result2->num_rows > 0) {
+                                                // output data of each row
+                                                while($row = $result2->fetch_assoc()) {
+                                                echo $row["descricao_comp"]. "<br>";
+                                                }
+                                            } else {
+                                                echo "0 resultados";
+                                            }
+                                            //Close connection
+                                            mysqli_close($conn);
+                                        ?>
                                 </div>
                             </div>
                         </div>
@@ -150,10 +276,8 @@
                                         <center>
                                             <p><span class="text-center h6"> Última Manutenção: </span>
                                             <p><span class="text-center h6"> DD/MM/AA </span>
-                                            <p><span class="text-center h6"> Rotina </span>
                                             <p><span class="text-center h6"> Próxima Manutenção: </span>
                                             <p><span class="text-center h6"> DD/MM/AA </span>
-                                            <p><span class="text-center h6"> Reparação </span>
                                         </center>
                                     </div>
                                 </div>
@@ -163,22 +287,19 @@
                 </div>
                 <div class="col-12 col-xl-4 col-xl">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body mb-3">
                             <div class="row align-items-center gx-0">
                                 <div class="col">
                                     <div style="margin-bottom:20px">
                                         <img src="alerta.png" alt="Alertas" width="100" height="100" style="margin:auto; display: block">
                                     </div>
-                                    <h5 class="text-uppercase text-center text-muted mb-4">
+                                    <h5 class="text-uppercase text-center text-muted mb-5">
                                         Avisos
                                     </h5>
-                                    <p><span class="h6"> Caudal: </span>
                                     <p><span class="h6"> Temperatura: </span>
-                                    <p><span class="h6"> Pressão: </span>
+                                    <p><span class="h6"> Humidade: </span>
                                     <p><span class="h6"> Vibração: </span>
                                     <p><span class="h6"> Ruido: </span>
-                                    <p><span class="h6"> Qualidade do ar: </span>
-                                    <p><span class="h6"> Níveis de CO2: </span>
                                 </div>
                             </div>
                         </div>
@@ -235,23 +356,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                    <div class="container" style="float:left">
-                                        <b> Obervações: </b>
-                                    </div>
-                                    <form action="data.php" method="post">
-                                    <div class="container" style="float:left">
-                                        <p>
-                                            <input type="text" name="observacoes" id="observacoes" size="40"  height="10" minlength="0" maxlength="300" >
-                                        </p>
-                                    </div>
-                                    </form>
-                                    <form action="data.php" method="get">
-                                    <div class="container mb-2" style="float:left">
-                                        <center>
-                                            <button style="margin-top:20px" name="subject" type="submit" value="submit1">Submit</button>
-                                        </center>
-                                    </div>
-                                    </form>
                             </div>
                         </div>
                     </div>
@@ -303,23 +407,6 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                    <div class="container" style="float:left">
-                                        <b> Manutenção: </b>
-                                    </div>
-                                    <form action="data.php" method="post">
-                                    <div class="container" style="float:left; margin-right:100px">
-                                        <p>
-                                            <input type="text" name="manutencoes" id="manutencoes" size="40"  height="10" minlength="0" maxlength="300" >
-                                        </p>
-                                    </div>
-                                    </form>
-                                    <form action="data.php" method="get">
-                                    <div class="container mb-2" style="float:left">
-                                        <center>
-                                            <button style="margin-top:20px" name="subject" type="submit" value="submit2">Submit</button>
-                                        </center>
-                                    </div>
-                                    </form>
                             </div>
                         </div>
                     </div>

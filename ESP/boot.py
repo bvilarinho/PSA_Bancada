@@ -17,18 +17,17 @@ gc.collect()
 #ssid = 'VodafoneMobileWiFi-3BCC3D'
 #password = 'rnPa719563'
 #mqtt_server = '192.168.0.122'
-#EXAMPLE IP ADDRESS
-#mqtt_server = '192.168.1.144'
+
 
 #casa aveiro
-ssid = 'Vodafone-85917F'
-password = 'bsqR7wspCw'
-mqtt_server ='192.168.1.85'
+#ssid = 'Vodafone-85917F'
+#password = 'bsqR7wspCw'
+#mqtt_server ='192.168.1.85'
 
 #dados
-#ssid = 'AndroidAPF552'
-#password = 'iqdl9722'
-#mqtt_server ='192.168.39.177'
+ssid = 'AndroidAPF552'
+password = 'iqdl9722'
+mqtt_server ='192.168.244.177'
 
 #casa
 #ssid = 'MEO-331EC1'
@@ -44,6 +43,8 @@ topic_sub3 = 'vibração'
 topic_pub3 = 'vibração'
 topic_sub4 = 'humidade'
 topic_pub4 = 'humidade'
+topic_sub5 = 'temp_hum'
+topic_pub5 = 'temp_hum'
 
 
 last_message = 0
