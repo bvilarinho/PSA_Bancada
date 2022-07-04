@@ -1,5 +1,5 @@
-import dht
 # Complete project details at https://RandomNerdTutorials.com
+import dht
 from machine import Pin, ADC, I2C
 from time import sleep
 import utime as time
@@ -72,6 +72,9 @@ while aux<5:
   hum = d.humidity()
   print (aux, ' Temperatura ºC: ', temp,  ' Humidade : ' ,  hum  )
   
+  now1 = time.gmtime()
+  hh_dht= '{:02d}:{:02d}:{:02d}'.format(now1[6],now1[4],now1[5])
+  
   msg =  str(temp)+' ; ' + str(hum) 
 
   try:
@@ -81,7 +84,7 @@ while aux<5:
       
         # msg = str (temp) 
         #topic_pub2 = 'teste/led'
-        client.publish(topic_pub5, msg)
+        #client.publish(topic_pub5, msg)
        
         last_message = time.time()
         counter += 1
@@ -99,55 +102,56 @@ while aux<5:
   # Inicio do tempo de aquisição
   start_time = time.ticks_ms()
   sleep (0.5)
-
-
+  
+  
   aux1 = 0
   log = ''
-
+  
   while (aux1<200):
     sleep (0.001)
     _xx = _sound.read()
-
+    
     # log.append ( [hh, _xx])
-    log = log + ' - ' + str(_xx)
+    log = log + ';' + str(_xx)
     print ( 'aux1 : ', aux1,' Sound : ', _xx )
-
+   
     # Terminar ciclo
     aux1 = aux1 + 1
-
-
+    
+  
   print ( 'aux1 : ', aux1,' Sound : ', _xx )
-
+   
   # gc.mem_free()
-
-
+  
+    
   # Tempo de amostragem em ms
   end_time = time.ticks_ms()
-  diff_time = end_time-start_time1
+  diff_time = end_time-start_time
   print ('Tempo de amostragem: ', diff_time )
-
+  
   now = time.gmtime()
-  dd = '{:04d}-{:02d}-{:02d}'.format(now[0],now[1],now[2])
-  hh = '{:02d}:{:02d}:{:02d}'.format(now[4],now[5],now[6])
-
-  log = dd + ' - ' + hh + ' - ' + str (diff_time) + ' -  ' + log
+  dia = '{:04d}-{:02d}-{:02d}'.format(now[0],now[1],now[2])
+  hh_ruido = '{:02d}:{:02d}:{:02d}'.format(now[6] ,now[4],now[5])
+  
+  log = hh_dht + ';' + str(temp) + ';' + str(hum) + ';' + dia + ';' + hh_ruido + ';' + str (diff_time) + '' + log
   try:
     print ( '[2] Intervalo de tempo entre msg : ' , time.time() - last_message )
     client.check_msg()
     if (time.time() - last_message) > message_interval:
         # arr = toBuffer(arr)
-        topic_pub2 = 'ruído'
-        client.publish(topic_pub2, log )
+        topic_pub = 'test\msg_unica'
+        client.publish(topic_pub, log )
         print (log)
+        print('msg:', msg)
         last_message = time.time()
         counter += 1
     else:
         print ( '[2] Intervalo de tempo entre msg, curto...' )
-
+          
   except OSError as e:
     restart_and_reconnect()
 
-
-
-
+  
+  
+ 
   gc.mem_free()

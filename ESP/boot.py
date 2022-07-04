@@ -20,14 +20,14 @@ gc.collect()
 
 
 #casa aveiro
-#ssid = 'Vodafone-85917F'
-#password = 'bsqR7wspCw'
-#mqtt_server ='192.168.1.85'
+ssid = 'Vodafone-85917F'
+password = 'bsqR7wspCw'
+mqtt_server ='192.168.1.85'
 
 #dados
-ssid = 'AndroidAPF552'
-password = 'iqdl9722'
-mqtt_server ='192.168.244.177'
+#ssid = 'AndroidAPF552'
+#password = 'iqdl9722'
+#mqtt_server ='192.168.48.177'
 
 #casa
 #ssid = 'MEO-331EC1'
@@ -35,12 +35,12 @@ mqtt_server ='192.168.244.177'
 #mqtt_server ='192.168.1.70'
 
 client_id = ubinascii.hexlify(machine.unique_id())
-topic_sub = 'temperatura'
-topic_pub = 'temperatura'
-topic_sub2 = 'ruído'
-topic_pub2 = 'ruído'
-topic_sub3 = 'vibração'
-topic_pub3 = 'vibração'
+topic_sub = 'test\msg_unica'
+topic_pub = 'test\msg_unica'
+topic_sub2 = 'ruido'
+topic_pub2 = 'ruido'
+topic_sub3 = 'vibracao'
+topic_pub3 = 'vibracao'
 topic_sub4 = 'humidade'
 topic_pub4 = 'humidade'
 topic_sub5 = 'temp_hum'
@@ -48,7 +48,7 @@ topic_pub5 = 'temp_hum'
 
 
 last_message = 0
-message_interval = 1
+message_interval = 0.5
 counter = 0
 
 station = network.WLAN(network.STA_IF)
