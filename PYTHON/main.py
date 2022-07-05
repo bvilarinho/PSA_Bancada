@@ -4,30 +4,17 @@ import random
 import time
 from time import sleep
 
-import pymysql.cursors
 from paho.mqtt import client as mqtt_client
 
 
 broker = '192.168.1.85'     #IP utilizado
 port = 1883
 
-topic5 = "temp_hum"
 topic = "test\msg_unica"
-###
-topic2 = "ruido"
-topic3 = "vibracao"
-topic4 = "humidade"
-###
+
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 100)}'
-# username = 'emqx'
-# password = 'public'
 
-
-# Leitura do ficheiro onde está guardado o id_comp
-f = open ('ID_comp.txt',"r")
-id_comp = int(f.readline())
-#
 
 def connect_mqtt() -> mqtt_client:
     def on_connect(client, userdata, flags, rc):
@@ -75,114 +62,158 @@ def subscribe(client: mqtt_client):
         global dia
         global hora
         global tempo_amostragem
-        global log_ruido
+        global log_ruido_vib
         global insert_statement
         global _aux
         global mensagem_completa
         global hora_temp_hum
         global valores_ruido
+        global ruido_inst
+        global id_comp
+        global values
+        global params
+        global timestamp_temp_hum
+        global timestamp_ruido
+        global timestamp_vib
+        global valores_vib
+        global tempo_amostragem_ruido
+        global tempo_amostragem_vib
+        global log_ruido
+        global log_vib
+        global valores_total
+
 
         if (msg.topic == topic):
             mensagem_completa = msg.payload.decode()
-            hora_temp_hum, _temp, _hum, dia, hora_ruido, tempo_amostragem, log_ruido = mensagem_completa.split(';',6)
-            valores_ruido = log_ruido.split(';',-1)
+            timestamp_vib, tempo_amostragem_vib, timestamp_temp_hum, _temp, _hum, timestamp_ruido, tempo_amostragem_ruido, log_ruido_vib = mensagem_completa.split(';',7)
+            valores_total = log_ruido_vib.split(';',-1)
+            valores_vib = valores_total[401:]
+            valores_ruido =valores_total[:400]
+
+            try:
+                fr = open("tempo_amostragem_ruido.txt", 'a+')
+                fr.write(tempo_amostragem_ruido)
+                fr.write("\n")
+
+            except FileNotFoundError:
+                fr = open("tempo_amostragem_ruido.txt", 'a+')
+                fr.write(tempo_amostragem_ruido)
+                fr.write("\n")
+
+            fr.close()
+
+            try:
+                fr = open("tempo_amostragem_vib.txt", 'a+')
+                fr.write(tempo_amostragem_vib)
+                fr.write("\n")
+
+            except FileNotFoundError:
+                fr = open("tempo_amostragem_vib.txt", 'a+')
+                fr.write(tempo_amostragem_vib)
+                fr.write("\n")
+
+            fr.close()
+
+
+            try:
+                fr = open("vibracao.txt", 'a+')
+                for item in valores_vib:
+                    fr.write("%s\n" % item)
+
+            except FileNotFoundError:
+                fr = open("vibracao.txt", 'a+')
+                for item in valores_vib:
+                    fr.write("%s\n" % item)
+
+            fr.close()
+
+            try:
+                fr = open("timestamp_vib.txt", 'a+')
+                fr.write(timestamp_vib)
+                fr.write("\n")
+
+            except FileNotFoundError:
+                fr = open("timestamp_vib.txt", 'a+')
+                fr.write(timestamp_vib)
+                fr.write("\n")
+
+            fr.close()
+
+            try:
+                fr = open("timestamp_ruido.txt", 'a+')
+                fr.write(timestamp_ruido)
+                fr.write("\n")
+
+            except FileNotFoundError:
+                fr = open("timestamp_ruido.txt", 'a+')
+                fr.write(timestamp_ruido)
+                fr.write("\n")
+
+            fr.close()
+
+
+            try:
+                fr = open("ruido.txt", 'a+')
+                for item in valores_ruido:
+                    fr.write("%s\n" % item)
+
+            except FileNotFoundError:
+                fr = open("ruido.txt", 'a+')
+                for item in valores_ruido:
+                    fr.write("%s\n" % item)
+
+            fr.close()
+
+
+            try:
+                fr = open("timestamp_temp_hum.txt", 'a+')
+                fr.write(timestamp_temp_hum)
+                fr.write("\n")
+
+            except FileNotFoundError:
+                fr = open("timestamp_temp_hum.txt", 'a+')
+                fr.write(timestamp_temp_hum)
+                fr.write("\n")
+
+            fr.close()
+
+            try:
+                fr = open("temperatura.txt", 'a+')
+                fr.write(_temp)
+                fr.write("\n")
+
+            except FileNotFoundError:
+                fr = open("temperatura.txt", 'a+')
+                fr.write(_temp)
+                fr.write("\n")
+
+            fr.close()
+
+            try:
+                fr = open("humidade.txt", 'a+')
+                fr.write(_hum)
+                fr.write("\n")
+
+            except FileNotFoundError:
+                fr = open("humidade.txt", 'a+')
+                fr.write(_hum)
+                fr.write("\n")
+
+            fr.close()
+
             print('mensagem completa:',mensagem_completa)
-            print('hora temp e hum:', hora_temp_hum)
+            print('timestamp temp e hum:', timestamp_temp_hum)
             print('temp:',_temp)
             print('hum:',_hum)
-            print('dia', dia)
-            print('hora inicio log ruido', hora_ruido)
-            print('tempo_amostragem:', tempo_amostragem)
-            print('ruido:', log_ruido)
+            print('timestamp inicial do ruído:', timestamp_ruido)
+            print('tempo_amostragem_ruido:', tempo_amostragem_ruido)
+            print('timestamp inicial da vibracao:', timestamp_vib)
+            print('tempo_amostragem_vib:', tempo_amostragem_vib)
             print('ruido:', valores_ruido)
+            print('len(ruido)', len(valores_ruido))
+            print('vibracao:', valores_vib)
+            print('len(vib):',len(valores_vib))
 
-
-
-
-
-        #if (msg.topic == topic3):
-            #_vib = msg.payload.decode()
-
-        #if (msg.topic == topic2):
-            #print("topic2 a ser lido")
-
-
-                # Connect to the database
-        connection = pymysql.connect(host='localhost',
-                                     user='root',
-                                     password='',
-                                     database='psa_bancada',
-                                     cursorclass=pymysql.cursors.DictCursor)
-
-
-
-        # connection with data base
-        with connection:
-            with connection.cursor() as cursor:
-
-                # deteção das grandezas a ler para o componente selecionado
-
-                sql1 = "select `temperatura` from `componentes` where `id_comp` = %s "
-                cursor.execute(sql1, id_comp)
-                leitura_temp_aux = cursor.fetchone()
-                leitura_temp = int(leitura_temp_aux['temperatura'])
-
-                sql2 = "select `humidade` from `componentes` where `id_comp` = %s"
-                cursor.execute(sql2, id_comp)
-                leitura_hum_aux = cursor.fetchone()
-                leitura_hum = int(leitura_hum_aux['humidade'])
-
-                sql3 = "select `ruido` from `componentes` where `id_comp` = %s"
-                cursor.execute(sql3, id_comp)
-                leitura_ruido_aux = cursor.fetchone()
-                leitura_ruido = int(leitura_ruido_aux['ruido'])
-
-                sql4 = "select `vibracao` from `componentes` where `id_comp` = %s"
-                cursor.execute(sql4, id_comp)
-                leitura_vib_aux = cursor.fetchone()
-                leitura_vib = int(leitura_vib_aux['vibracao'])
-
-                print('No componente', id_comp,' são recebidas as grandezas:' )
-                print('temperatura' if leitura_temp == 1 else '')
-                print('humidade' if leitura_hum == 1 else '')
-                print('ruido' if leitura_ruido == 1 else '')
-                print('vibracao' if leitura_vib == 1 else '')
-
-
-                if leitura_hum == 1 and leitura_temp == 1:
-                    sql = ("INSERT INTO `%s` (`temperatura`,`humidade`) VALUES  ({},{})".format(_temp, _hum))
-                    cursor.execute(sql, int(id_comp))
-                    print('valores enviados de temp e hum para a tabela do componente', id_comp,' temp:', _temp, 'hum:', _hum)
-
-
-                if leitura_hum == 1 and leitura_temp == 0:
-                    sql = ("INSERT INTO `%s` (`humidade`) VALUES  ({})".format(_hum))
-                    cursor.execute(sql, int(id_comp))
-                    print('2**** h:',_hum)
-
-                if leitura_temp == 1 and leitura_hum == 0:
-                    sql = ("INSERT INTO `%s` (`temperatura`) VALUES  ({})".format(_temp))
-                    cursor.execute(sql, int(id_comp))
-                    print('3**** T:', _temp)
-
-                if leitura_vib == 1:
-                    sql = ("INSERT INTO `%s` (`vibracao`) VALUES  ({})".format(_vib))
-                    cursor.execute(sql, int(id_comp))
-                    print('4**** ', _vib)
-
-                if leitura_ruido == 1:
-                    sql = ("INSERT INTO `%s` (`ruido`) VALUES  `(%s)`")
-                    cursor.execute(sql, id_comp, valores_ruido)
-                    print('5*****')
-
-
-            # connection is not autocommit by default. So you must commit to save
-            # your changes.
-            connection.commit()
-
-
-
-    # Leitura temperatura---------topico que estiver aqui é o subscrito, por isso é que quando havia dois topics (temp_hum + ruido) o ruido so aparecia no primeiro
     client.subscribe(topic)
     client.on_message = on_message
 
@@ -191,11 +222,7 @@ def subscribe(client: mqtt_client):
 def run():
     client = connect_mqtt()
     subscribe(client)
-    #client.loop_forever()
-    client.loop_start()
-    sleep (20)
-    client.loop_stop
-
+    client.loop_forever()
 
 
 if __name__ == '__main__':
