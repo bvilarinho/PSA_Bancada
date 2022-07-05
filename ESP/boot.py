@@ -29,6 +29,10 @@ mqtt_server ='192.168.1.85'
 #password = 'iqdl9722'
 #mqtt_server ='192.168.48.177'
 
+#ssid = 'AndroidAPF6536'
+#password = '12345678'
+#mqtt_server = '192.168.43.104'
+
 #casa
 #ssid = 'MEO-331EC1'
 #password = 'FD3BBEF5EC'
@@ -37,14 +41,6 @@ mqtt_server ='192.168.1.85'
 client_id = ubinascii.hexlify(machine.unique_id())
 topic_sub = 'test\msg_unica'
 topic_pub = 'test\msg_unica'
-topic_sub2 = 'ruido'
-topic_pub2 = 'ruido'
-topic_sub3 = 'vibracao'
-topic_pub3 = 'vibracao'
-topic_sub4 = 'humidade'
-topic_pub4 = 'humidade'
-topic_sub5 = 'temp_hum'
-topic_pub5 = 'temp_hum'
 
 
 last_message = 0
