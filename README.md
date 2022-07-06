@@ -53,7 +53,7 @@ a diagnosticar e facilitar a interação entre todos os sistemas.
 Para o funcionamento completo, é necessário:
 - Utilizar os sensores corretos, ligados ao ESP32 de acordo com o [projeto elétrico](https://github.com/bvilarinho/PSA_Bancada/tree/main/Esquema%20Elétrico).
 - Ter os ficheiros [boot.py](https://github.com/bvilarinho/PSA_Bancada/blob/main/ESP/boot.py), [umqttsimple.py](https://github.com/bvilarinho/PSA_Bancada/blob/main/ESP/umqttsimple.py) e [main.py](https://github.com/bvilarinho/PSA_Bancada/blob/main/ESP/main.py) no ESP32 a que estão ligados os sensores.
-- [Página WEB](https://github.com/bvilarinho/PSA_Bancada/tree/main/WEB), de modo a manipular a base de dados e visualizar os dados obtidos.
+- [Página WEB](https://github.com/bvilarinho/PSA_Bancada/tree/main/WEB), de modo a manipular a base de dados e visualizar os dados obtidos, no diretório htdocs do XAMPP ou MAMP.
 - Ter a [Base de dados](https://github.com/bvilarinho/PSA_Bancada/tree/main/DataBase_PSA), configurada de acordo.
 - Ficheiro [main.py](https://github.com/bvilarinho/PSA_Bancada/tree/main/PYTHON) com o código de receção do MQTT e machine learning.
 
