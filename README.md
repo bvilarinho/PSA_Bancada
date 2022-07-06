@@ -18,8 +18,7 @@
 Trabalho desenvolvido ao longo
 de um semestre que visa o desenvolvimento de uma bancada de diagnóstico,
 com o principal objetivo de distinguir e prever eventuais anomalias existentes em um conjunto de dados obtidos através de sensores. Esta unidade
-de prevenção divide-se em quatro sistemas, sensores, base de dados, inte-
-ligência artificial e interface gráfica, podendo ser expandido posteriormente
+de prevenção divide-se em quatro sistemas, sensores, base de dados, inteligência artificial e interface gráfica, podendo ser expandido posteriormente
 para mais. Com isto, foi desenvolvido um programa que permite a leitura
 dos dados dos sensores e armazená-los numa base de dados previamente
 criada, de forma que o algoritmo de inteligência artificial consiga aceder a
