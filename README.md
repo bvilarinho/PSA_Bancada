@@ -59,8 +59,8 @@ Para o funcionamento completo, é necessário:
 - Ficheiro [main.py](https://github.com/bvilarinho/PSA_Bancada/tree/main/PYTHON) com o código de receção do MQTT e machine learning.
 
 ## Demonstração
-[Video](https://github.com/bvilarinho/PSA_Bancada/tree/main/Demonstração) com a demonstração do trabalho desenvolvido em funcionamento.
-
+- [Video](https://github.com/bvilarinho/PSA_Bancada/tree/main/Demonstração) com a demonstração do trabalho desenvolvido em funcionamento.
+- [Relatório e Apresentação](https://github.com/bvilarinho/PSA_Bancada/tree/main/Apresentação%20e%20Relatório) com o trabalho desenvolvido.
 
 ## Trabalho futuro
 No futuro em seguimento do trabalho desenvolvido é possível a expansão à utilização de mais sensores, e principalmente a implementação de um verdadeiro algoritmo de machine learning.
