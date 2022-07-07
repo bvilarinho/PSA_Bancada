@@ -18,8 +18,7 @@
 Trabalho desenvolvido ao longo
 de um semestre que visa o desenvolvimento de uma bancada de diagnóstico,
 com o principal objetivo de distinguir e prever eventuais anomalias existentes em um conjunto de dados obtidos através de sensores. Esta unidade
-de prevenção divide-se em quatro sistemas, sensores, base de dados, inte-
-ligência artificial e interface gráfica, podendo ser expandido posteriormente
+de prevenção divide-se em quatro sistemas, sensores, base de dados, inteligência artificial e interface gráfica, podendo ser expandido posteriormente
 para mais. Com isto, foi desenvolvido um programa que permite a leitura
 dos dados dos sensores e armazená-los numa base de dados previamente
 criada, de forma que o algoritmo de inteligência artificial consiga aceder a
@@ -54,13 +53,13 @@ a diagnosticar e facilitar a interação entre todos os sistemas.
 Para o funcionamento completo, é necessário:
 - Utilizar os sensores corretos, ligados ao ESP32 de acordo com o [projeto elétrico](https://github.com/bvilarinho/PSA_Bancada/tree/main/Esquema%20Elétrico).
 - Ter os ficheiros [boot.py](https://github.com/bvilarinho/PSA_Bancada/blob/main/ESP/boot.py), [umqttsimple.py](https://github.com/bvilarinho/PSA_Bancada/blob/main/ESP/umqttsimple.py) e [main.py](https://github.com/bvilarinho/PSA_Bancada/blob/main/ESP/main.py) no ESP32 a que estão ligados os sensores.
-- [Página WEB](https://github.com/bvilarinho/PSA_Bancada/tree/main/WEB), de modo a manipular a base de dados e visualizar os dados obtidos.
+- [Página WEB](https://github.com/bvilarinho/PSA_Bancada/tree/main/WEB), de modo a manipular a base de dados e visualizar os dados obtidos, no diretório htdocs do XAMPP ou MAMP.
 - Ter a [Base de dados](https://github.com/bvilarinho/PSA_Bancada/tree/main/DataBase_PSA), configurada de acordo.
 - Ficheiro [main.py](https://github.com/bvilarinho/PSA_Bancada/tree/main/PYTHON) com o código de receção do MQTT e machine learning.
 
 ## Demonstração
-[Video](https://github.com/bvilarinho/PSA_Bancada/tree/main/Demonstração) com a demonstração do trabalho desenvolvido em funcionamento.
-
+- [Video](https://github.com/bvilarinho/PSA_Bancada/tree/main/Demonstração) com a demonstração do trabalho desenvolvido em funcionamento.
+- [Relatório e Apresentação](https://github.com/bvilarinho/PSA_Bancada/tree/main/Apresentação%20e%20Relatório) com o trabalho desenvolvido.
 
 ## Trabalho futuro
 No futuro em seguimento do trabalho desenvolvido é possível a expansão à utilização de mais sensores, e principalmente a implementação de um verdadeiro algoritmo de machine learning.
