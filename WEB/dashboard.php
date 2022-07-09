@@ -1,3 +1,10 @@
+<?php
+    // Filtros da data funcionam ??
+    // Datas de manutenção
+    // Avisos
+    // Tabelas do fim
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,31 +66,85 @@
             </div>
         </div>
     </nav>
-    <?php
-        // servername => localhost
-        // username => root
-        // password => empty
-        // database name => staff
-        $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
-
-        // Check connection
-        if($conn === false){
-            die("ERROR: Could not connect. "
-                . mysqli_connect_error());
-        }
-
-        $tipo_sensor = $_POST['tipo_sensor'];
-        $id_comp = $_REQUEST['id_comp'];  
-
-        //Close connection
-        mysqli_close($conn);
-    ?>
     <div class="container mt-5">
+        <div>
+        <?php 
+            $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+            // Check connection
+            if($conn === false){
+                die("ERROR: Could not connect. "
+                    . mysqli_connect_error());
+            }
+
+            function test_input($data) {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+            }
+
+            if(isset($_POST["Atualizar"])){
+                $comp_id = $_REQUEST['id_comp'];
+                if (empty($_POST["tipo_sensor"])) {
+                    $tipo_sensor = "Escolha o tipo de dados que quer ver";
+                  } else {
+                    $tipo_sensor = test_input($_POST["tipo_sensor"]);
+                }
+                if(!empty($comp_id) && !empty($tipo_sensor)){
+                    
+                    $r_1 = "SHOW COLUMNS FROM `$comp_id` LIKE '$tipo_sensor'";
+                    $e = mysqli_query($conn, $r_1);
+                    if ($e->num_rows > 0) {
+                        $dataI = $_REQUEST['data_inicio'];
+                        $dataU = $_REQUEST['data_fim'];
+                        if(empty($dataI) && empty($dataU)){
+                            $testar = "SELECT * FROM `$comp_id` WHERE `$tipo_sensor` IS NOT NULL";
+                        }elseif(!empty($dataI) && !empty($dataU) && $dataU >= $dataI){
+                            if($tipo_sensor == 'temperatura' || $tipo_sensor == "humidade"){
+                                $testar = "SELECT * FROM `$comp_id` WHERE `$tipo_sensor` IS NOT NULL AND data_temp_hum BETWEEN '$dataI' and '$dataU'";
+                            }else{
+                                $testar = "SELECT * FROM `$comp_id` WHERE `$tipo_sensor` IS NOT NULL AND data_vib_rui BETWEEN '$dataI' and '$dataU'";
+                            }
+                        }else{
+                            $message = "<span style = 'color: red'> Preencha as duas datas corretamente</span>";
+                        }
+                        
+                        $mqry = mysqli_query($conn, $testar);
+                        $i=0;
+                        $values = array();
+                        if($mqry -> num_rows > 0){
+                            while($row = mysqli_fetch_assoc($mqry)){
+                                $values[] = $row;
+                            }
+                        }
+                        $vals = array();
+                        $datas = array();
+                        foreach($values as $val){
+                            array_push($vals, $val[$tipo_sensor]);
+                            array_push($datas, $val['id']);
+                            //SE ALTERARES PARA DATE A COLUNA data FAZER E APAGAR O QUE ESTÁ EMBAIXO, DENTRO DO FOREACH:
+                            //array_push($manutencoesData, $val['data']);
+                            //$separar = explode(" ", $val['data_temp_hum']);
+                            //array_push($datas, $separar[0]);
+                        }
+                    }else{
+                        $tipo_sensor = "Tipo de dados não existe!";
+                    }
+                }else{
+                    $message = "<span style = 'color: red'> - Verifique o ID Componente e o tipo de sensor</span>";
+                }
+            }
+            //print_r($dataU);
+
+            mysqli_close($conn);
+        ?>
+        </div>
         <div class="row">
             <div class="col-12 col-xl-8">
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Dados dos Sensores - <?php echo "$tipo_sensor"?></h4>
+                    <div class="card-header"> 
+                        <h4>Dados dos Sensores - <?php echo "<span style = 'color: red'>".$tipo_sensor."</span>";?></h4>
                     </div>
                     <div class="card-body">
                         <canvas id="chart"></canvas>
@@ -93,7 +154,7 @@
             <div class="col-12 col-xl-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-header-title">Filtros</h4>
+                        <h4 class="card-header-title">Filtros <?php echo $message;?></h4>
                     </div>
                     <div class="card-body">
                         <form action="dashboard.php" method="post">
@@ -112,19 +173,19 @@
                             </div>
                             <div class="container">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="temperatura" value="Temperatura" checked>
+                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="temperatura" value="temperatura">
                                     <label class="form-check-label" for="temperatura">Temperatura</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="humidade" value="Humidade">
+                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="humidade" value="humidade">
                                     <label class="form-check-label" for="humidade">Humidade</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="vibracao" value="Vibração">
+                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="vibracao" value="vibracao">
                                     <label class="form-check-label" for="vibracao">Vibração</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="ruido" value="Ruído">
+                                    <input class="form-check-input" type="radio" name="tipo_sensor" id="ruido" value="ruido">
                                     <label class="form-check-label" for="ruido">Ruído</label>
                                 </div>
                             </div>
@@ -269,6 +330,61 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                        // servername => localhost
+                        // username => root
+                        // password => empty
+                        // database name => staff
+                        $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+                        // Check connection
+                        if($conn === false){
+                        die("ERROR: Could not connect. "
+                            . mysqli_connect_error());
+                        }
+                        
+                        if(isset($_POST["Atualizar"])){
+                            $query = "SELECT DISTINCT data_manutencoes FROM `manutencoes` WHERE id_maq = $id_maq AND id_comp = $id_comp ORDER BY data_manutencoes DESC";
+                            $res = mysqli_query($conn, $query);
+                            date_default_timezone_set('Europe/Lisbon');
+                            $dataNow=date('Y-m-d');
+                            $teste = $res -> num_rows;
+                            $dataUlt = "";
+                            $dataProx = "";
+                            $d = array();
+                            if($res -> num_rows > 0){
+                                while($row = $res->fetch_assoc()) {
+                                    /*$i = explode(" ",$row["data_manutencoes"]);
+                                    $j = explode("-", $i);
+                                    $data = explode("-", $dataNow);
+                                    $dataProx = $data[2];*/
+                                    $d[] = $row;
+                                }
+                            }
+                            $manutencoesData = array();
+                            foreach($d as $d1){
+                                $sep = explode(" ", $d1['data_manutencoes']);
+                                array_push($manutencoesData, $sep[0]);
+                                //SE ALTERARES PARA DATE A COLUNA data_manutencoes FAZER E APAGAR O QUE ESTÁ EM CIMA, DENTRO DO FOREACH::
+                                //array_push($manutencoesData, $d1['data_manutencoes']);
+                            }
+
+                            $dataProx = "0 resultados";
+                            $dataUlt = "0 resultados";
+                            $pos = 0;
+                            $ant = count($d)-1;
+                            foreach($d as $verif){
+                                $dataProx = $manutencoesData[$pos] > $dataNow ? $manutencoesData[$pos]: $dataProx;
+                                $dataUlt = $manutencoesData[$ant] < $dataNow ? $manutencoesData[$ant] : $dataUlt;
+                                $pos++;
+                                $ant--;
+                            }
+                            
+                        }
+
+                        //Close connection
+                        mysqli_close($conn);
+                    ?>
                 <div class="col-12 col-xl-4 col-xl">
                     <div class="card">
                         <div class="card-body mb-3">
@@ -283,9 +399,9 @@
                                     <div>
                                         <center>
                                             <p><span class="text-center h6"> Última Manutenção: </span>
-                                            <p><span class="text-center h6"> DD/MM/AA </span>
+                                            <p><span class="text-center h6"> <?php echo $dataUlt;?> </span>
                                             <p><span class="text-center h6"> Próxima Manutenção: </span>
-                                            <p><span class="text-center h6"> DD/MM/AA </span>
+                                            <p><span class="text-center h6"> <?php echo $dataProx;?> </span>
                                         </center>
                                     </div>
                                 </div>
@@ -304,10 +420,73 @@
                                     <h5 class="text-uppercase text-center text-muted mb-5">
                                         Avisos
                                     </h5>
-                                    <p><span class="h6"> Temperatura: </span>
-                                    <p><span class="h6"> Humidade: </span>
-                                    <p><span class="h6"> Vibração: </span>
-                                    <p><span class="h6"> Ruido: </span>
+                                    <?php 
+                                        // servername => localhost
+                                        // username => root
+                                        // password => empty
+                                        // database name => staff
+                                        $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+                                        // Check connection
+                                        if($conn === false){
+                                        die("ERROR: Could not connect. "
+                                            . mysqli_connect_error());
+                                        }
+                                        
+                                        //id_avaria = 0 --> temperatura
+                                        //id_avaria = 1 --> humidade
+                                        //id_avaria = 2 --> vibracao
+                                        //id_avaria = 3 --> ruido
+
+                                        $id_comp = $_REQUEST['id_comp'];
+                                        $veri = "SELECT * FROM `avarias` WHERE id_comp = $id_comp AND id_avarias = 0 ORDER BY 'data' DESC LIMIT 1";                                    
+                                        $ql = mysqli_query($conn, $veri); 
+                                        if ($ql->num_rows > 0) {                                
+                                            $av_temp = "Anomalia Detetada ";
+                                            $row = mysqli_fetch_assoc($ql);
+                                            $row = explode(" ",$row['data']);
+                                            $UltAv = $row[0];
+                                        } else {
+                                            $av_temp = "0 results";
+                                        }
+                                        $veri1 = "SELECT * FROM `avarias` WHERE id_comp = $id_comp AND id_avarias = 1 ORDER BY 'data' DESC LIMIT 1" ;                                    
+                                        $qle = mysqli_query($conn, $veri1); 
+                                        if ($qle->num_rows > 0) {                                
+                                            $av_hum = "Anomalia Detetada ";
+                                            $rowh = mysqli_fetch_assoc($qle);
+                                            $rowh = explode(" ",$rowh['data']);
+                                            $UltAvh = $rowh[0];                                            
+                                        } else {
+                                            $av_hum = "0 results";
+                                        }
+                                        $veri2 = "SELECT * FROM `avarias` WHERE id_comp = $id_comp AND id_avarias = 2 ORDER BY 'data' DESC LIMIT 1" ;                                    
+                                        $qlv = mysqli_query($conn, $veri2); 
+                                        if ($qlv->num_rows > 0) {                                
+                                            $av_vib = "Anomalia Detetada ";
+                                            $rowv = mysqli_fetch_assoc($qlv);
+                                            $rowv = explode(" ",$rowv['data']);
+                                            $UltAvv = $rowv[0];                                            
+                                        } else {
+                                            $av_vib = "0 results";
+                                        }
+                                        $veri3 = "SELECT * FROM `avarias` WHERE id_comp = $id_comp AND id_avarias = 3 ORDER BY 'data' DESC LIMIT 1" ;                                    
+                                        $qlr = mysqli_query($conn, $veri3); 
+                                        if ($qlr->num_rows > 0) {                                
+                                            $av_ru = "Anomalia Detetada ";
+                                            $rowr = mysqli_fetch_assoc($qlr);
+                                            $rowr = explode(" ",$rowr['data']);
+                                            $UltAvr = $rowr[0];
+                                        } else {
+                                            $av_ru = "0 results";
+                                        }
+
+                                        //Close Connection
+                                        mysqli_close($conn);
+                                    ?>
+                                    <p><span class="h6"> Temperatura:  <?php echo $av_temp. "  "; echo $UltAv;?></span>
+                                    <p><span class="h6"> Humidade: <?php echo $av_hum; echo $UltAvh;?></span>
+                                    <p><span class="h6"> Vibração: <?php echo $av_vib; echo $UltAvv;?></span>
+                                    <p><span class="h6"> Ruido: <?php echo $av_ru; echo $UltAvr;?></span>
                                 </div>
                             </div>
                         </div>
@@ -336,32 +515,31 @@
                                     </tr>
                                     </thead>
                                     <tbody class="list">
-                                    <tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/04/18 </time>
-                                        </td>
-                                        <td class="goal-observacao"> Observação </td>
-                                    </tr><tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/05/18 </time>
-                                        </td>
-                                        <td class="goal-observacao"> Observação </td>
-                                    </tr><tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/06/18 </time>
-                                        </td>
-                                        <td class="goal-observacao"> Observação </td>
-                                    </tr><tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/07/18 </time>
-                                        </td>
-                                        <td class="goal-observacao"> Observação </td>
-                                    </tr><tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/08/18 </time>
-                                        </td>
-                                        <td class="goal-observacao"> Observação </td>
-                                    </tr>
+                                    <?php 
+                                        // servername => localhost
+                                        // username => root
+                                        // password => empty
+                                        // database name => staff
+                                        $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+                                        // Check connection
+                                        if($conn === false){
+                                        die("ERROR: Could not connect. "
+                                            . mysqli_connect_error());
+                                        }
+
+                                        $qry = "SELECT * FROM `observacoes` WHERE id_comp = $id_comp ORDER BY 'data' DESC LIMIT 5";
+                                        $execute = mysqli_query($conn, $qry);
+                                        if($execute -> num_rows > 0){
+                                            while($row = $execute -> fetch_assoc()){
+                                                $datObs= explode(" ", $row['data']);
+                                                echo "<tr><td class='goal-data'>".$datObs[0].
+                                                "</td><td class='goal-observacao'>".$row['observacoes'] ."</td></tr>";
+                                            }
+                                        }
+                                        //Close Connection
+                                        mysqli_close($conn);
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -387,32 +565,31 @@
                                     </tr>
                                     </thead>
                                     <tbody class="list">
-                                    <tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/04/18 </time>
-                                        </td>
-                                        <td class="goal-descricao"> Descrição </td>
-                                    </tr><tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/05/18 </time>
-                                        </td>
-                                        <td class="goal-descricao"> Descrição </td>
-                                    </tr><tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/06/18 </time>
-                                        </td>
-                                        <td class="goal-descricao"> Descrição </td>
-                                    </tr><tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/07/18 </time>
-                                        </td>
-                                        <td class="goal-descricao"> Descrição </td>
-                                    </tr><tr>
-                                        <td class="goal-data">
-                                            <time datetime="2018-10-24"> 07/08/18 </time>
-                                        </td>
-                                        <td class="goal-descricao"> Descrição </td>
-                                    </tr>
+                                    <?php 
+                                        // servername => localhost
+                                        // username => root
+                                        // password => empty
+                                        // database name => staff
+                                        $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+                                        // Check connection
+                                        if($conn === false){
+                                        die("ERROR: Could not connect. "
+                                            . mysqli_connect_error());
+                                        }
+
+                                        $qry1 = "SELECT * FROM `manutencoes` WHERE id_comp = $id_comp ORDER BY 'data_manutencoes' DESC LIMIT 5";
+                                        $execute2 = mysqli_query($conn, $qry1);
+                                        if($execute2 -> num_rows > 0){
+                                            while($row = $execute2 -> fetch_assoc()){
+                                                $datMan= explode(" ", $row['data_manutencoes']);
+                                                echo "<tr><td class='goal-data'>".$datMan[0].
+                                                "</td><td class='goal-manutencoes'>".$row['manutencoes'] ."</td></tr>";
+                                            }
+                                        }
+                                        //Close Connection
+                                        mysqli_close($conn);
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -428,23 +605,61 @@
         </nav>
     </body>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--<canvas id="myChart" width="400" height="400"></canvas>-->
   <script>
-     const ctx = document.getElementById("chart").getContext('2d');
-     const myChart = new Chart(ctx, {
-       type: 'line',
-       data: {
-         labels: ["04/14", "05/14", "06/14", "07/14", "08/14", "09/14"],
+    <?php
+        // servername => localhost
+        // username => root
+        // password => empty
+        // database name => staff
+        $conn = mysqli_connect("localhost", "root", "root", "psa_bancada");
+
+        // Check connection
+        if($conn === false){
+            die("ERROR: Could not connect. "
+                . mysqli_connect_error());
+        }
+
+        $sql1 = "SELECT temperatura FROM `1` WHERE temperatura IS NOT NULL ";
+        $result =  mysqli_query($conn, $sql1);
+        $dados_temperatura = array();
+        //$dados_temperatura = array($result);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            /*while($row = $result->fetch_assoc()) {
+                $dados_temperatura = array($row["temperatura"]);
+                //echo var_dump($dados_temperatura);                                  
+            }*/
+            while($row  = mysqli_fetch_array($result)){
+                $dados_temperatura[] = $row;
+            }                                       
+        } else {
+            echo "0 resultados";
+        }
+
+        //Close connection
+        mysqli_close($conn);
+    ?>
+    var dados_t2 = <?php echo json_encode($vals); ?>;
+    var datas_t = <?php echo json_encode($datas); ?>;
+    var legend = <?php echo json_encode($tipo_sensor);?>;
+    const ctx = document.getElementById("chart").getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+         labels: datas_t,
          datasets: [{
-                label: 'Temperatura (ºC)',
+                label: legend,
                 borderColor: 'rgb(47, 128, 237)',
-                data: [0.5, 1, 0.8, 0.6, 0.2, 2],
-            },
-            {
-                label: 'Caudal (bar)',
-                borderColor: 'rgb(255, 0, 0)',
-                data: [1, 4, 10, 5, 6, 7],
-          }]
+                data: dados_t2
+            }]//,
+            //{
+                //label: 'Caudal (bar)',
+                //borderColor: 'rgb(255, 0, 0)',
+                //data: [1.4, 4, 10, 5, 6, 7],
+          //}]
         },
         options: {
           scales: {
@@ -456,13 +671,7 @@
           }
         },
       });
-</script>
-  <style>
-        #chart{
-            width:25%;
-            height:25%;
-        }
-</style>
+    </script>
 <script>
     function atualizarDados() {
         var maquina = document.getElementById("maquinas").options[document.getElementById("maquinas").selectedIndex].value;

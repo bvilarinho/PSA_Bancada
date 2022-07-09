@@ -113,11 +113,13 @@
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo "ID Máquina : " .$row["id_maq"]. "<br>";
+                        $mess = "<span style = 'color: black'>    ID Máquina : " .$row["id_maq"]."</span>";
+                        //$mess = "    ID Máquina : " .$row["id_maq"]. "<br>";
                         
                     }
                 } else {
-                    echo "Máquina não exixte";
+                    $mess = "<span style = 'color: red'>    Máquina não existe</span>";
+                    //$mess =  "    Máquina não existe";
                 }
 
                 $rep2 = "SELECT id_comp FROM componentes WHERE id_comp = ".$id_comp;
@@ -125,49 +127,178 @@
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-                        echo "ID Componente : " .$row["id_comp"]. "<br>";
+                        $me = "<span style = 'color: black'>    ID Componente : " .$row["id_comp"]."</span>";
+                        //$me = "    ID Componente : " .$row["id_comp"];
                         $fp = fopen("ID_comp.txt","wb");
                         fwrite($fp,$id_comp);
                         fclose($fp);
                     }
                 } else {
-                    echo "<br>"."Componente não exixte";
+                    $me = "<span style = 'color: red'>    Componente não existe</span>";
+                    //$me = "   Componente não existe";
+                    $fp = fopen("ID_comp.txt","wb");
+                    fwrite($fp," ");
+                    fclose($fp);
                 } 
                 
-                If (unlink('dados.txt')) {
-                    echo "file was successfully deleted";
-                  } else {
-                    echo "there was a problem deleting the file";
-                  }
+                if(!empty($id_comp) && !empty($id_maq)){
+                    if(!empty($observacoes) && empty($manutencoes)){
+                        $sql_1 = "INSERT INTO `observacoes`(`id_maq`, `id_comp`, `observacoes`) VALUES ('$id_maq','$id_comp','$observacoes')";
+                        mysqli_query($conn, $sql_1);  
+                    }
+                    if(!empty($manutencoes) && !empty($data_man)){
+                        if(empty($observacoes)){
+                            $sql_2 = "INSERT INTO `manutencoes`(`id_maq`, `id_comp`, `manutencoes`, `data_manutencoes`)VALUES ('$id_maq','$id_comp','$manutencoes','$data_man')";
+                            mysqli_query($conn, $sql_2);
+                        }else{
+                            $sql_1 =  "INSERT INTO `observacoes`(`id_maq`, `id_comp`, `observacoes`) VALUES ('$id_maq','$id_comp','$observacoes')";
+                            mysqli_query($conn, $sql_1);   
+                        
+                            $sql_2 = "INSERT INTO `manutencoes`(`id_maq`, `id_comp`, `manutencoes`, `data_manutencoes`) VALUES ('$id_maq','$id_comp','$manutencoes','$data_man')";
+                            mysqli_query($conn, $sql_2);
+                        }
+                    }else if(empty($observacoes) && empty($manutencoes) && empty($data_man)){
+                    }else{ 
+                        $erro = "<span style = 'color: red'> Verifique que preencheu a data corretamente</span>";
+                    }
+                }
 
-                if(!empty($id_maq) && !empty($id_comp) && !empty($observacoes) && empty($manutencoes)){ 
-                    
-                    $sql_1 =  "INSERT INTO `observacoes`(`id_maq`, `id_comp`, `observacoes`) VALUES ('$id_maq','$id_comp','$observacoes')";
-                    mysqli_query($conn, $sql_1);  
+                $ig = false;
+                if (unlink('temperatura.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error = "Ficheiro(s) não existe(m)";
                 }
-                if(!empty($id_maq) && !empty($id_comp) && empty($observacoes) && !empty($manutencoes) && !empty($data_man)){ 
-                    
-                    $sql_2 = "INSERT INTO `manutencoes`(`id_maq`, `id_comp`, `manutencoes`, `data_manutencoes`)VALUES ('$id_maq','$id_comp','$manutencoes','$data_man')";
-                    mysqli_query($conn, $sql_2);
+                if (unlink('humidade.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error = "Ficheiro(s) não existe(m)";
+                }  
+                if (unlink('vibracao.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error = "Ficheiro(s) não existe(m)";
+                }
+                if (unlink('ruido.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error  = "Ficheiro(s) não existe(m)";
+                }
+                if (unlink('timestamp_temp_hum.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error = "Ficheiro(s) não existe(m)";
+                }
+                if (unlink('timestamp_ruido.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error = "Ficheiro(s) não existe(m)";
+                }
+                if (unlink('timestamp_vib.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error = "Ficheiro(s) não existe(m)";
+                }
+                if (unlink('tempo_amostragem_vib.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error =  "Ficheiro(s) não existe(m)";
+                }
+                if (unlink('tempo_amostragem_ruido.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error = "Ficheiro(s) não existe(m)";
+                }
+                if (unlink('alertas.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error = "Ficheiro(s) não existe(m)";
+                }
+                if (unlink('KM0_novo.txt')) {
+                    $ig = true;
+                    $mes = "Ficheiro(s) apagado(s) com sucesso";
+                } else {
+                    $error = "Ficheiro(s) não existe(m)";
+                }
+
+                $qryTH = "SELECT id FROM `$id_comp` WHERE temperatura IS NOT NULL OR humidade IS NOT NULL ORDER BY id DESC LIMIT 1";
+                $rTH = mysqli_query($conn,$qryTH);
+                if ($rTH->num_rows > 0) {
+                    // output data of each row
+                    $TH = $rTH->fetch_assoc();
+                    $valTH = $TH["id"]."\n";
                 }else{
-                    echo "<br>"."Verifique que preencheu a data corretamente";
+                    $valTH = "0 \n";
                 }
-                if(!empty($id_maq) && !empty($id_comp) && !empty($observacoes) && !empty($manutencoes) && !empty($data_man)){ 
-                    
-                    $sql_1 =  "INSERT INTO `observacoes`(`id_maq`, `id_comp`, `observacoes`) VALUES ('$id_maq','$id_comp','$observacoes')";
-                    mysqli_query($conn, $sql_1);   
-                    
-                    $sql_2 = "INSERT INTO `manutencoes`(`id_maq`, `id_comp`, `manutencoes`, `data_manutencoes`) VALUES ('$id_maq','$id_comp','$manutencoes','$data_man')";
-                    mysqli_query($conn, $sql_2);
+                $qryV = "SELECT id FROM `$id_comp` WHERE vibracao ORDER BY id DESC LIMIT 1";
+                $rV = mysqli_query($conn,$qryV);
+                if($rV -> num_rows > 0){
+                    $V = $rV->fetch_assoc();
+                    $valV = $V["id"]."\n";
                 }else{
-                    echo "<br>"."Verifique que preencheu a data corretamente";
+                    $valV = "0 \n";
                 }
+                $qryR = "SELECT id FROM `$id_comp` WHERE ruido ORDER BY id DESC LIMIT 1";
+                $rR = mysqli_query($conn,$qryR); 
+                if($rR -> num_rows > 0){
+                    $R = $rR->fetch_assoc();
+                    $valR = $R["id"];
+                }else{
+                    $valR = "0";
+                }
+                $linha = $valTH . $valV .$valR;
+                $ficheiro = fopen("id.txt", "wb");
+                fwrite($ficheiro, $linha);
+                fclose($ficheiro);
+                
+                $ai = "SELECT * FROM KM0 WHERE id_comp = ".$id_comp;
+                $res =  mysqli_query($conn, $ai);                                             
+                if ($res->num_rows > 0) {
+                    // output data of each row
+                    $fKM0 = fopen("KM0.txt","wb");
+                    $row = $res->fetch_assoc();
+                    $cal = 1;
+                    $tem_med = $row['temperatura_media'] != null ? $row['temperatura_media'] : " ";
+                    $tem_max = $row['temperatura_max'] != null ? $row['temperatura_max'] : " ";   
+                    $tem_min = $row['temperatura_min'] != null ? $row['temperatura_min'] : " ";
+                    $hum_med = $row['humidade_media'] != null ? $row['humidade_media'] : " ";
+                    $hum_max = $row['humidade_max'] != null ? $row['humidade_max'] : " ";   
+                    $hum_min = $row['humidade_min'] != null ? $row['humidade_min'] : " ";
+                    $vib_med = $row['vibracao_media'] != null ? $row['vibracao_media'] : " ";
+                    $vib_max = $row['vibracao_max'] != null ? $row['vibracao_max'] : " ";   
+                    $vib_min = $row['vibracao_min'] != null ? $row['vibracao_min'] : " ";
+                    $ru_med = $row['ruido_media'] != null ? $row['ruido_media'] : " ";
+                    $ru_max = $row['ruido_max'] != null ? $row['ruido_max'] : " ";   
+                    $ru_min = $row['ruido_min'] != null ? $row['ruido_min'] : " ";
+                    $imp_temp = $tem_min."\n".$tem_max."\n".$tem_med;
+                    $imp_hum = $hum_min."\n".$hum_max."\n".$hum_med;
+                    $imp_vib = $vib_min."\n".$vib_max."\n".$vib_med;                    
+                    $imp_ru = $ru_min."\n".$ru_max."\n".$ru_med;
+                    $imp = $cal."\n".$imp_temp."\n".$imp_hum."\n".$imp_vib."\n".$imp_ru;
+                   
+                    fwrite($fKM0,$imp);
+                    fclose($fKM0);
+                } else {
+                    $fKM0 = fopen("KM0.txt","wb");
+                    fwrite($fKM0,"0");
+                    fclose($fKM0);
+                } 
 
             }
 
         //Close connection
         mysqli_close($conn); 
-     ?>  
+    ?>  
     <div class="container mt-4">
         <form action="index.php" method="post">
         <div class="row">
@@ -181,11 +312,11 @@
                             <h4 style="margin-bottom:32px"> Insira o ID da máquina e do componente </h4>
                                 <p style="margin-bottom:30px">
                                     <label for="id_maq">ID Máquina:</label>
-                                    <input type="number" name="id_maq" id="id_maq">
+                                    <input type="number" name="id_maq" id="id_maq"><?php echo $mess;?>
                                 </p>
                                 <p style="margin-bottom:30px">
                                     <label for="id_comp">ID Componente:</label>
-                                    <input type="number" name="id_comp" id="id_comp">
+                                    <input type="number" name="id_comp" id="id_comp"><?php echo $me;?>
                                 </p>
                         </center>
                     </div>
@@ -197,6 +328,7 @@
                         <center><h4 class="card-header-title">Observações e/ou Manutenções</h4></center>
                     </div>
                 <div class="card-body">
+                    <?php echo $erro;?>
                     <div  class="card-body">
                         <center>
                             <div style="margin-top: 30px">
@@ -218,7 +350,14 @@
         <div class="col-12 col-xl-12 mt-4 mb-5">
             <center>
                 <input style="margin-top:20px" type="submit" name = "Submit" value="Submit">
-            </center>
+
+        <?php                     
+            if ($ig == false)
+                echo "<br><span style = 'color: red; font-size: 20px; : center;'>".$error."</span>";
+             else
+                 echo "<br>".$mes;
+        ?>  
+                    </center>
         </div>
         </form>
     </div>
